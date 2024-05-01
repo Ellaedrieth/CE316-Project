@@ -1,16 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.ce316project.Controller">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.Controller">
+    <children>
+        <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #000000;">
+            <children>
+                <Button layoutX="338.0" layoutY="14.0" minWidth="68.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #0000;" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <MenuButton fx:id="projectMenuBtn" layoutX="34.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New Project" />
+                        <MenuItem mnemonicParsing="false" text="Open Project" />
+                        <MenuItem mnemonicParsing="false" text="Edit Project" />
+                    </items>
+                    <graphic>
+                        <FontIcon fx:id="project" iconColor="#a8ffe0" iconSize="15" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-project-diagram;" />
+                    </graphic>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <MenuButton fx:id="configMenuBtn" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Configuration" textFill="WHITE">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="New Configuration" />
+                        <MenuItem mnemonicParsing="false" text="Open Configuration" />
+                    </items>
+                    <graphic>
+                        <FontIcon fx:id="config" iconColor="#8aff84" iconSize="20" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-sun;" />
+                    </graphic>
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </MenuButton>
+                <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" wrappingWidth="23.0" />
+                <Line endX="349.3999938964844" endY="3.814697265625E-6" layoutX="101.0" layoutY="58.0" startX="-100.0" stroke="WHITE" />
+                <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="310.0" prefWidth="237.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: #FF0000;" stylesheets="@design.css">
+                    <columns>
+                        <TableColumn fx:id="studentCol" prefWidth="117.60004425048828" style="-fx-background-color: #080808;" text="Student ID" />
+                        <TableColumn fx:id="resultCol" prefWidth="115.99993896484375" style="-fx-background-color: #080808;" text="Result" />
+                    </columns>
+                </TableView>
+                <Button fx:id="runBtn" layoutX="333.0" layoutY="314.0" mnemonicParsing="false" style="-fx-background-color: #000000;" text="RUN" textFill="WHITE">
+                    <graphic>
+                        <FontIcon strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fab-google-play; -fx-icon-color: #1e90ff;" text="Text" />
+                    </graphic>
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+                <Text fill="#bfb7b7" layoutX="196.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Integrated Assignment Environment">
+                    <font>
+                        <Font name="System Bold" size="13.0" />
+                    </font>
+                </Text>
+                <Text fill="#948d8d" layoutX="369.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Team #4">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Text>
+                <ImageView fitHeight="30.0" fitWidth="31.0" layoutX="114.0" layoutY="606.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@img_ieu.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="zipBtn" layoutX="144.0" layoutY="510.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" style="-fx-background-color: #101010;" text="Convert to ZIP file" textFill="WHITE">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                    <graphic>
+                        <FontIcon iconColor="#cceca6" iconSize="25" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-save;" text="Text" />
+                    </graphic>
+                </Button>
+                <Text fill="#bfb7b7" layoutX="146.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Department of Computer Engineering">
+                    <font>
+                        <Font name="System Bold" size="10.0" />
+                    </font>
+                </Text>
+            </children></AnchorPane>
+    </children>
+</StackPane>

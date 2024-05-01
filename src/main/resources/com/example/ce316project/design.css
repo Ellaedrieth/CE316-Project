@@ -1,0 +1,16 @@
+.menu-button .arrow {
+    -fx-background-color: #000000;
+}
+
+.menu-button .prompt-text {
+    -fx-text-fill: #ffffff;
+}
+
+.menu-button .context-menu {
+    -fx-background-color: lightgray;
+}
+
+.table-view .column-header > .label {
+    -fx-text-fill: #F2F0F2; /* Başlık metni rengi (örneğin, kırmızı) */
+    -fx-font-size: 13px; /* Metin font boyutu */
+}

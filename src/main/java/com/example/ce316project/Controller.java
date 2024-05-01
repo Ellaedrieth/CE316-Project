@@ -1,14 +1,10 @@
 package com.example.ce316project;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 
-public class Controller {
-    @FXML
-    private Label welcomeText;
 
+public class Controller{
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
+    public MenuButton projectMenuB;
 }
