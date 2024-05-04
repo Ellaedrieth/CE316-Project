@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ProjectPane">
+    <children>
+        <Label layoutX="47.0" layoutY="57.0" style="-fx-text-fill: white;" text="Project Name" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label layoutX="47.0" layoutY="143.0" prefHeight="20.0" prefWidth="95.0" style="-fx-text-fill: white;" text="Configuration" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Button layoutX="339.0" layoutY="181.0" mnemonicParsing="false" style="-fx-background-color: #1e90ff;" text="Create New" textFill="WHITE" />
+        <Label layoutX="47.0" layoutY="239.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Submission Zip File" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField layoutX="48.0" layoutY="274.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" />
+        <TextField layoutX="44.0" layoutY="100.0" prefHeight="26.0" prefWidth="371.0" style="-fx-background-color: black; -fx-border-color: grey;" />
+        <Button layoutX="336.0" layoutY="275.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Select" textFill="WHITE" />
+        <Label layoutX="51.0" layoutY="325.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Expected Output File" textFill="WHITE">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <TextField layoutX="44.0" layoutY="363.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" />
+        <Button layoutX="336.0" layoutY="364.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Select" textFill="WHITE" />
+        <Button layoutX="188.0" layoutY="501.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" />
+        <MenuButton layoutX="48.0" layoutY="180.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" text="Configuration Button" textFill="WHITE">
+            <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+            </items>
+        </MenuButton>
+    </children>
+</AnchorPane>
