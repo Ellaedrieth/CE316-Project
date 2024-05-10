@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ConfigController">
+    <children>
+        <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;">
+            <children>
+                <Label layoutX="40.0" layoutY="42.0" style="-fx-text-fill: white;" text="Configuration Name" textFill="WHITE" AnchorPane.bottomAnchor="574.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="42.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="125.0" prefHeight="20.0" prefWidth="95.0" style="-fx-text-fill: white;" text="Programming Language" textFill="WHITE" AnchorPane.bottomAnchor="505.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="125.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="40.0" layoutY="206.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Compiler Path" textFill="WHITE" AnchorPane.bottomAnchor="424.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="206.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="compilerPathInput" layoutX="40.0" layoutY="233.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="390.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="233.0" />
+                <TextField fx:id="configNameField" layoutX="40.0" layoutY="83.0" prefHeight="26.0" prefWidth="371.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="83.0" />
+                <Label layoutX="51.0" layoutY="325.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" textFill="WHITE" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="325.0">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button fx:id="generateConfigBtn" layoutX="171.0" layoutY="404.0" mnemonicParsing="false" onAction="#configGenAct" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="198.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="404.0" />
+                <TextField fx:id="languageInput" layoutX="40.0" layoutY="162.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" />
+            <TextField fx:id="compilerParametersInput" layoutX="40.0" layoutY="314.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" />
+            <Label layoutX="40.0" layoutY="280.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Compiler Parameters" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="chooseCompilerPathButton" layoutX="334.0" layoutY="234.0" mnemonicParsing="false" text="Select Path" />
+            </children>
+        </AnchorPane>
+
+    </children>
+</HBox>

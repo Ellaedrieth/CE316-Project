@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
-<StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.Controller">
+<StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.MainController">
     <children>
         <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #000000;">
             <children>
@@ -26,9 +25,9 @@
                 </Button>
                 <MenuButton fx:id="projectMenuBtn" layoutX="34.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#newProject" text="New Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#openProject" text="Open Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#editProject" text="Edit Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#newProjectButton" text="New Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#openProjectButton" text="Open Project" />
+                        <MenuItem mnemonicParsing="false" onAction="#editProjectButton" text="Edit Project" />
                     </items>
                     <graphic>
                         <FontIcon fx:id="project" iconColor="#a8ffe0" iconSize="15" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-project-diagram;" />
@@ -39,7 +38,7 @@
                 </MenuButton>
                 <MenuButton fx:id="configMenuBtn" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Configuration" textFill="WHITE">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New Configuration" />
+                        <MenuItem mnemonicParsing="false" onAction="#newConfigurationButton" text="New Configuration" />
                         <MenuItem mnemonicParsing="false" text="Open Configuration" />
                     </items>
                     <graphic>

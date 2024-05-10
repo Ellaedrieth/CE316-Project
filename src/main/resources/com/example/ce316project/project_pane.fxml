@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ProjectPane">
+<AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ProjectController">
     <children>
         <Label layoutX="47.0" layoutY="57.0" style="-fx-text-fill: white;" text="Project Name" textFill="WHITE" AnchorPane.bottomAnchor="556.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="60.0">
             <font>
@@ -33,11 +33,7 @@
         <TextField layoutX="44.0" layoutY="363.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="363.0" />
         <Button layoutX="336.0" layoutY="364.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Select" textFill="WHITE" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="364.0" />
         <Button layoutX="188.0" layoutY="501.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="151.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="451.0" />
-        <MenuButton layoutX="48.0" layoutY="180.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" text="Configuration Button" textFill="WHITE" AnchorPane.bottomAnchor="443.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="180.0">
-            <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-            </items>
-        </MenuButton>
+      <ChoiceBox fx:id="projectConfigMenu" layoutX="40.0" layoutY="181.0" prefHeight="26.0" prefWidth="267.0" />
+
     </children>
 </AnchorPane>
