@@ -1,4 +1,0 @@
-Configuration Name: cpp
-Programming Language: C++
-Compiler Path: C:\Users\Hp\Downloads\codeblocks-20.03mingw-setup.exe
-Compiler Parameters: -Wall -O2 -std=c++11 -o myprogram.exe -I include_directory
