@@ -7,13 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.HashSet;
 import java.util.ResourceBundle;
 
 public class ConfigController implements Initializable {
@@ -21,7 +19,6 @@ public class ConfigController implements Initializable {
     public TextField configNameField, compilerPathInput, compilerParametersInput, languageInput;
     @FXML
     public Button generateConfigBtn, chooseCompilerPathButton;
-    static String newSavedFileName = "";
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         chooseCompilerPathButton.setOnAction(event -> chooseCompilerPath());
@@ -64,8 +61,7 @@ public class ConfigController implements Initializable {
     }
 
     public void saveConfiguration(String configName, String language, String compilerPath, String compilerParameter) {
-        ProjectController projectController = new ProjectController();
-        try (FileOutputStream fileOutputStream = new FileOutputStream(configName + ".dat")) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/com/example/ce316project/"+configName + ".dat")) {
             StringBuilder newConfigData = new StringBuilder(); //using StringBuilder is more effective from the point of memory usage
             newConfigData.append("Configuration Name: ").append(configName).append("\n");
             newConfigData.append("Programming Language: ").append(language).append("\n");
@@ -79,8 +75,6 @@ public class ConfigController implements Initializable {
             successAlert.setHeaderText("Configuration saved successfully!");
             successAlert.showAndWait();
 
-            newSavedFileName = configName + ".dat";
-            ProjectController.keepNewLangItems(newSavedFileName);
         } catch (IOException e) {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");

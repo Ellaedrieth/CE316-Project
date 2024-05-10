@@ -13,19 +13,8 @@ import javafx.stage.Stage;
 public class MainController {
     @FXML
     public MenuButton projectMenuBtn;
-
-    @FXML
-    private Button runBtn;
-
-    @FXML
-    public ChoiceBox<String> projectTitle;
-    @FXML
-    public TextArea submissionPathArea, outputPathArea;
     @FXML
     public MenuButton configMenuBtn;
-    String selectedItemForConfigBtn;
-    @FXML
-    public MenuButton projectMenuB;
 
     public void newProjectButton(ActionEvent event) {
         System.out.println("New Project");

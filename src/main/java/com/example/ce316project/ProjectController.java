@@ -1,5 +1,4 @@
 package com.example.ce316project;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +12,7 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 
 public class ProjectController implements Initializable {
-
+    public final String CONFIG_FILE_PATH = "src/main/resources/com/example/ce316project/";
     @FXML
     ChoiceBox<String> projectConfigMenu;
     //to access the object from the ConfigController class; reference
@@ -23,10 +22,8 @@ public class ProjectController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         projectConfigMenu.getItems().addAll(defaultLang());
-        projectConfigMenu.getItems().addAll(newLangItems);
-
+        projectConfigMenu.getItems().addAll(scanConfigFiles());
     }
-
     public static String takeLang(String newConfigFileName){
         String languageValue = "";
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(newConfigFileName))){
@@ -42,11 +39,20 @@ public class ProjectController implements Initializable {
         }
         return languageValue;
     }
-    public static void keepNewLangItems(String newSavedFile){
-        newSavedFile = takeLang(newSavedFile);
-        newLangItems.add(newSavedFile);
-    }
 
+    public HashSet<String> scanConfigFiles(){
+        FileScanner fileScannerForConfig = new FileScanner();
+        try {
+            HashSet<String> configFilesList = fileScannerForConfig.scanConfigFiles(CONFIG_FILE_PATH);
+            for(String datFile : configFilesList){
+                String langTaken = takeLang(datFile);
+                newLangItems.add(langTaken);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return newLangItems;
+    }
 
     public ObservableList<String>  defaultLang(){
         progLanItems.add("java");
