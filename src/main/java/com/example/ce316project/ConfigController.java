@@ -38,8 +38,10 @@ public class ConfigController implements Initializable {
             validationError.setHeaderText("Please fill in all required fields.");
             validationError.showAndWait();
         }
-        //save configuration
-        saveConfiguration(configurationNameVal, languageVal, compilerPathVal, compilerParametersVal);
+        else{
+            //save configuration
+            saveConfiguration(configurationNameVal, languageVal, compilerPathVal, compilerParametersVal);
+        }
     }
 
 
