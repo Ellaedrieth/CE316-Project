@@ -11,6 +11,7 @@ public class Compilation_Interpretation {
 
     static String selectedCompilerParam = "";
     static String selectedExecParam = "";
+    static int size = 0;
 
     public static final String Existing_Project_File_Path = "src/main/resources/com/example/ce316project/";
     //to extract files in the zip file
@@ -36,13 +37,13 @@ public class Compilation_Interpretation {
                         String nameFile = entryName.substring(0, datIndex);
                         compileFileSet.add(nameFile);
                         System.out.println(compileFileSet);
-                        Alert validationError = new Alert(Alert.AlertType.INFORMATION);
-                        validationError.setTitle("The Extraction Message");
-                        validationError.setHeaderText("The extraction of the zip file is successfully completed.");
-                        validationError.showAndWait();
                     }
                 }
             }
+            Alert validationError = new Alert(Alert.AlertType.INFORMATION);
+            validationError.setTitle("The Extraction Message");
+            validationError.setHeaderText("The extraction of the zip file is successfully completed.");
+            validationError.showAndWait();
         }
         catch (IOException e){
             System.err.println("Error while reading zip file: " + e.getMessage());
@@ -59,18 +60,18 @@ private static void extractCommand() throws IOException, InterruptedException {
     String directoryPath = MainController.getDirectoryPathWithoutZip();
     String zipFileName = MainController.getOnlyZipName();
 
-    // 1. CD Komutu için ProcessBuilder
+    // 1. Process Builder for cd command
     ProcessBuilder cdProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "cd", directoryPath);
-    cdProcessBuilder.redirectErrorStream(true); // Hata akışını çıkış akışına yönlendir
+    cdProcessBuilder.redirectErrorStream(true);
     Process cdProcess = cdProcessBuilder.start();
-    cdProcess.waitFor(); // CD komutunun tamamlanmasını bekle
+    cdProcess.waitFor(); // Wait to complete the cd command.
 
-// 2. MKDIR Komutu için ProcessBuilder
+    // 2. Process Builder for mkdir command
     ProcessBuilder mkdirProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "mkdir", "extractedFiles");
-    mkdirProcessBuilder.directory(new File(directoryPath)); // Çalışma dizinini belirt
+    mkdirProcessBuilder.directory(new File(directoryPath));
     mkdirProcessBuilder.redirectErrorStream(true);
     Process mkdirProcess = mkdirProcessBuilder.start();
-    mkdirProcess.waitFor(); // MKDIR komutunun tamamlanmasını bekle
+    mkdirProcess.waitFor(); // Wait to complete the mkdir command.
 
     unZipFiles(directoryPath + "\\"+zipFileName, MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
 }
@@ -126,30 +127,25 @@ private static void extractCommand() throws IOException, InterruptedException {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+        size = execSet.size();
         try{
             if (!compSet.isEmpty()) {
                 int i = 0;
                 int j = 0;
                 while (i < compSet.size() && j < execSet.size()) {
-                    System.out.println("Size: " + compSet.size() + execSet.size());
                     String compCommand = compSet.get(i);
                     String execCommand = execSet.get(j);
-                        // ,"&&" , execCommand eklenmiş hali cmdye buraya yazılır
-                        System.out.println("Comp command: " + compCommand);
-                        System.out.println("Exec command: " + execCommand);
-                        System.out.println(MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
                         File file = new File(MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
                         Process compileProcess = Runtime.getRuntime().exec(compCommand, null,file);
                         compileProcess.waitFor();
-
                         Process executeProcess = Runtime.getRuntime().exec(execCommand, null,file);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(executeProcess.getInputStream()));
                         String line;
                         long startTime = System.currentTimeMillis();
                         long timeout = 3000; // 3 saniye
                         while ((line = reader.readLine()) != null) {
-                            System.out.println("Output: " + line); // Konsola yazdır
-                            writer.append(line).append("\n"); // Dosyaya yaz
+                            System.out.println("Output: " + line); // Print to the console
+                            writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
                             writer.flush();
                         }
                         executeProcess.waitFor();
@@ -159,23 +155,25 @@ private static void extractCommand() throws IOException, InterruptedException {
                 writer.close();
             }
             else{
-                for (String execCommand : execSet) {
-                    String[] cmd = {"cmd.exe", "/c", "cd", MainController.getDirectoryPathWithoutZip() + "/extractedFiles", "&&", execCommand};
-                    System.out.println("THE PATH: " + MainController.getDirectoryPathWithoutZip()+"/extractedFiles");
-                    // ProcessBuilder ile komut dizisini çalıştır
-                    ProcessBuilder processBuilder = new ProcessBuilder(cmd);
-                    processBuilder.redirectOutput(outputFile);
-                    processBuilder.redirectErrorStream(true);
-
-                    Process process = processBuilder.start();
-                    process.waitFor();
-
+                for (int i=0; i<execSet.size();i++) {
+                    String execCommand = execSet.get(i);
+                    File file = new File(MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
+                    Process executeProcess = Runtime.getRuntime().exec(execCommand, null,file);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(executeProcess.getInputStream()));
+                    String line;
+                    long startTime = System.currentTimeMillis();
+                    long timeout = 3000; // 3 saniye
+                    while ((line = reader.readLine()) != null) {
+                        System.out.println("Output: " + line); // Print to the console
+                        writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
+                        writer.flush();
+                    }
+                    executeProcess.waitFor();
                 }
             }
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         return outputFile;
     }
 
@@ -183,24 +181,15 @@ private static void extractCommand() throws IOException, InterruptedException {
         ArrayList<String> compSet = new ArrayList<>();
         //javac fileName.java
         String compilerParam = getCompilerParameter();
-        System.out.println("Compiler Param in reg: "+ compilerParam);
         for(String fileName : compileSet){
             String newLine = compilerParam.replace("fileName", fileName);
-            System.out.println(fileName);
-            System.out.println(newLine);
-            System.out.println("File : " + newLine);
             compSet.add(newLine);
-            for(String items: compSet){
-                System.out.println("Items in compSet for compilationFileReg method:  " + items);
-            }
         }
         return compSet;
     }
     public static ArrayList<String> executionFileReg(ArrayList<String> executionSet){
         ArrayList<String> execSet = new ArrayList<>();
-        //javac fileName.java
         String execParam = getExecParameter();
-        System.out.println("Execution Param in reg: "+ execParam);
         for(String fileName : executionSet){
             String newLine = execParam.replace("fileName", fileName);
             execSet.add(newLine);
@@ -216,8 +205,6 @@ private static void extractCommand() throws IOException, InterruptedException {
                 String line;
                 while((line = reader.readLine()) != null){
                     if(line.startsWith("Configuration Name:")){
-                        System.out.println(line);
-                        System.out.println("In the config name of getCompilerParameter");
                         selectedConfigName = line.substring(line.indexOf(":") +2);
                         BufferedReader readerComp = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
                         String lineComp ;
@@ -226,7 +213,6 @@ private static void extractCommand() throws IOException, InterruptedException {
                                 if(lineComp.startsWith("Compiler Parameters:")){
                                     selectedCompilerParam = lineComp.substring(lineComp.indexOf(":") + 2);
                                     if(!selectedCompilerParam.isEmpty()){
-                                        System.out.println("Selected compiler param: " + selectedCompilerParam);
                                         break;
                                     }
                                 }
@@ -247,24 +233,18 @@ private static void extractCommand() throws IOException, InterruptedException {
         //to represent the current file path
         File file = new File(MainController.getProjectPath(MainController.takenValue));
         if (file.exists()) {
-            System.out.println("In the config name of getExecParameter");
             try (BufferedReader reader = new BufferedReader(new FileReader(MainController.getProjectPath(MainController.takenValue)))) {
                 String line;
                 while((line = reader.readLine()) != null){
                     if(line.startsWith("Configuration Name:")){
-                        System.out.println(line);
-                        System.out.println("In the config name of getExecParameter");
                         selectedConfigName = line.substring(line.indexOf(":") +2);
                         BufferedReader readerComp = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
                         String lineComp ;
                         try{
                             while ((lineComp = readerComp.readLine()) != null){
-                                System.out.println("In the config name of getExecParameter");
                                 if(lineComp.startsWith("Execution Parameter:")){
-                                    System.out.println("In the config name of getExecParameter");
                                     selectedExecParam = lineComp.substring(lineComp.indexOf(":") + 2);
                                     if(!selectedExecParam.isEmpty()){
-                                        System.out.println("Selected execution param: " + selectedExecParam);
                                         break;
                                     }
                                 }

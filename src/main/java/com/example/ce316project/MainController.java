@@ -53,7 +53,6 @@ public class MainController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            System.out.println("burdayımm");
         });
     }
 
@@ -105,19 +104,14 @@ public class MainController implements Initializable {
             try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("2");
                     //to search the "Configuration Name" field in the file
                     if (line.startsWith("Configuration Name:")) {
-                        System.out.println("3");
-                        System.out.println(line);
                         selectedConfigName = line.substring(line.indexOf(":")+2);
                         BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
                         String lineExtension;
                             try {
                                 while ((lineExtension = readerExtension.readLine()) != null){
-                                    System.out.println("4");
                                     if(lineExtension.startsWith("Executable File Extension:")){
-                                        System.out.println("5");
                                         selectedConfigExtension = lineExtension.substring(lineExtension.indexOf(":")+2);
 
                                     }
@@ -149,17 +143,12 @@ public class MainController implements Initializable {
 
                     //to search the "Configuration Name" field in the file
                     if (line.startsWith("Configuration Name:")) {
-                        System.out.println("3");
-                        System.out.println(line);
                         selectedConfigName = line.substring(line.indexOf(":")+2);
                         BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
                         String lineExtension;
                         try {
                             while ((lineExtension = readerExtension.readLine()) != null){
-                                System.out.println("4");
-
                                 if(lineExtension.startsWith("Compiler Path:")){
-                                    System.out.println("5");
                                     selectedCompilerPath = lineExtension.substring(lineExtension.indexOf(":")+2);
                                 }
                             }
@@ -187,20 +176,14 @@ public class MainController implements Initializable {
             try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-
                     //to search the "Configuration Name" field in the file
                     if (line.startsWith("Configuration Name:")) {
-                        System.out.println("3");
-                        System.out.println(line);
                         selectedConfigName = line.substring(line.indexOf(":")+2);
                         BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
                         String lineExtension;
                         try {
                             while ((lineExtension = readerExtension.readLine()) != null){
-                                System.out.println("4");
-
                                 if(lineExtension.startsWith("Compiler Parameters:")){
-                                    System.out.println("5");
                                     selectedCompilerParam = lineExtension.substring(lineExtension.indexOf(":")+2);
                                 }
                             }
@@ -220,20 +203,16 @@ public class MainController implements Initializable {
     //to get the zip file path name using the project path in the getProjectPath() method
     public static String getZipFilePathItem(String takenValue) {
         String zipFilePath = "";
-        System.out.println("here");
 
         //to represent the current file path
         File file = new File(getProjectPath(takenValue));
-        System.out.println(getProjectPath(takenValue));
         if (file.exists()) {
             //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
             try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println("here");
                     //to search the "Zip File Path" field in the file
                     if (line.startsWith("Zip File Path:")) {
-                        System.out.println("hereeeeee");
                         zipFilePath = line.substring(line.indexOf(":")+2);
                     }
                 }
