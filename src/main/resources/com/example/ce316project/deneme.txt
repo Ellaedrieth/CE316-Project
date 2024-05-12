@@ -1,0 +1,4 @@
+Project Name: deneme
+Configuration Name: java
+Zip File Path: C:\Users\Hp\Downloads\test.zip
+Output File: C:\Users\Hp\Desktop\output.txt

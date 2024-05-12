@@ -24,6 +24,7 @@ public class FileScanner{
         }
         return configFilesList;
     }
+
     public HashSet<String> scanProjectFiles(String directoryPath) throws IllegalAccessException {
         HashSet<String> projectFilesList = new HashSet<>();
         File directory = new File(directoryPath);

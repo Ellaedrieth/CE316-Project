@@ -16,23 +16,23 @@ import java.util.ResourceBundle;
 
 public class ConfigController implements Initializable {
     @FXML
-    public TextField configNameField, compilerPathInput, compilerParametersInput, languageInput;
+    public TextField configNameField, compilerParametersInput, extensionInput, languageInput, executionParameterInput;
     @FXML
     public Button generateConfigBtn, chooseCompilerPathButton;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chooseCompilerPathButton.setOnAction(event -> chooseCompilerPath());
+//        chooseCompilerPathButton.setOnAction(event -> chooseCompilerPath());
         generateConfigBtn.setOnAction(event -> configGenAct());
-
     }
     public void configGenAct() {
         //FOR THE VALUES FROM THE CONFIG SCREEN
         String configurationNameVal = configNameField.getText();
-        String compilerPathVal = compilerPathInput.getText();
+        String executionParameter = executionParameterInput.getText();
         String compilerParametersVal = compilerParametersInput.getText();
+        String extensionVal = extensionInput.getText();
         String languageVal = languageInput.getText();
 
-        if (configurationNameVal.isEmpty() || compilerPathVal.isEmpty() || compilerParametersVal.isEmpty() || languageVal.isEmpty()) {
+        if (configurationNameVal.isEmpty() || executionParameter.isEmpty() || compilerParametersVal.isEmpty() || extensionVal.isEmpty() || languageVal.isEmpty()) {
             Alert validationError = new Alert(Alert.AlertType.ERROR);
             validationError.setTitle("Validation Error");
             validationError.setHeaderText("Please fill in all required fields.");
@@ -40,35 +40,19 @@ public class ConfigController implements Initializable {
         }
         else{
             //save configuration
-            saveConfiguration(configurationNameVal, languageVal, compilerPathVal, compilerParametersVal);
+            saveConfiguration(configurationNameVal, extensionVal, languageVal, compilerParametersVal,executionParameter);
         }
     }
 
-
-    public void chooseCompilerPath() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Compiler Path");
-
-        //only for the executable files (to compile)
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Executable Files (*.exe)", "*.exe");
-        fileChooser.getExtensionFilters().add(extensionFilter);
-
-        //to open the computer files screen
-        Stage stage = (Stage) chooseCompilerPathButton.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
-
-        if (selectedFile != null) {
-            compilerPathInput.setText(selectedFile.getAbsolutePath());
-        }
-    }
-
-    public void saveConfiguration(String configName, String language, String compilerPath, String compilerParameter) {
+    public void saveConfiguration(String configName, String extension, String language,String compilerParameter, String executionParameter) {
         try (FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/com/example/ce316project/"+configName + ".dat")) {
             StringBuilder newConfigData = new StringBuilder(); //using StringBuilder is more effective from the point of memory usage
             newConfigData.append("Configuration Name: ").append(configName).append("\n");
+            newConfigData.append("Executable File Extension: ").append(extension).append("\n");
             newConfigData.append("Programming Language: ").append(language).append("\n");
-            newConfigData.append("Compiler Path: ").append(compilerPath).append("\n");
             newConfigData.append("Compiler Parameters: ").append(compilerParameter).append("\n");
+            newConfigData.append("Execution Parameter: ").append(executionParameter).append("\n");
+
 
             fileOutputStream.write(newConfigData.toString().getBytes(StandardCharsets.UTF_8));
 
@@ -76,7 +60,6 @@ public class ConfigController implements Initializable {
             successAlert.setTitle("Success");
             successAlert.setHeaderText("Configuration saved successfully!");
             successAlert.showAndWait();
-
         } catch (IOException e) {
             Alert errorAlert = new Alert(Alert.AlertType.ERROR);
             errorAlert.setTitle("Error");

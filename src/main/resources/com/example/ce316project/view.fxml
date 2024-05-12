@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
 
-<?import org.kordamp.ikonli.javafx.FontIcon?>
-<StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.MainController">
+<StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.MainController">
     <children>
         <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #000000;">
             <children>
@@ -50,7 +43,7 @@
                 </MenuButton>
                 <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" wrappingWidth="23.0" />
                 <Line endX="349.3999938964844" endY="3.814697265625E-6" layoutX="101.0" layoutY="58.0" startX="-100.0" stroke="WHITE" />
-                <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="310.0" prefWidth="237.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: #FF0000;" stylesheets="@design.css">
+                <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="319.0" prefWidth="244.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: #FF0000;" stylesheets="@design.css">
                     <columns>
                         <TableColumn fx:id="studentCol" prefWidth="117.60004425048828" style="-fx-background-color: #080808;" text="Student ID" />
                         <TableColumn fx:id="resultCol" prefWidth="115.99993896484375" style="-fx-background-color: #080808;" text="Result" />
@@ -92,6 +85,15 @@
                         <Font name="System Bold" size="10.0" />
                     </font>
                 </Text>
+            <ChoiceBox fx:id="openProject" layoutX="60.0" layoutY="124.0" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: #101010;" stylesheets="@design.css" />
+            <Button fx:id="refreshBtn" layoutX="223.0" layoutY="120.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #000000;" text="Refresh" textFill="WHITE">
+               <graphic>
+                  <FontIcon fill="#eaff70" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-file-download;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </FontIcon>
+               </graphic></Button>
             </children></AnchorPane>
     </children>
 </StackPane>

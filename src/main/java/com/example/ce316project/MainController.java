@@ -1,21 +1,291 @@
 package com.example.ce316project;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.*;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.ResourceBundle;
 
-public class MainController {
+
+public class MainController implements Initializable {
     @FXML
     public MenuButton projectMenuBtn;
     @FXML
     public MenuButton configMenuBtn;
+    @FXML
+    public Button runBtn;
+    @FXML
+    public ChoiceBox<String> openProject;
+    public static final String Existing_Project_File_Path = "src/main/resources/com/example/ce316project/";
+    @FXML
+    Button refreshBtn;
+    static HashSet<String> updateProjectItems = new HashSet<>();
+    static String takenValue;
+    String selectedConfigExtension = "";
+    String selectedCompilerPath = "";
+    String selectedCompilerParam = "";
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        openProject.getItems().addAll(getProjectName());
+        openProject.setValue("Open Projects");
+        refreshBtn.setOnAction(event -> refreshProjectList());
+        runBtn.setOnAction(event -> {
+            takenValue = openProject.getValue();
+            try {
+                Comparison.compareFiles
+                        (Compilation_Interpretation.compile(
+                                Compilation_Interpretation.compilationFileReg(
+                                        Compilation_Interpretation.zipFileExtraction()),
+                                Compilation_Interpretation.executionFileReg(Compilation_Interpretation.zipFileExtraction())),
+                                getOutputFilePathItem(takenValue));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("burdayımm");
+        });
+    }
+
+    public void refreshProjectList(){
+        openProject.getItems().clear();
+        openProject.getItems().addAll(getProjectName());
+    }
+    public static String takeExistingProjectName(String newProjectFileName){
+        String ProjectVal = "";
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(newProjectFileName))){
+            String line;
+            while((line = bufferedReader.readLine()) != null){
+                if(line.startsWith("Project Name: ")){
+                    ProjectVal = line.substring("Project Name: ".length()).trim();
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ProjectVal;
+    }
+    public HashSet<String> getProjectName(){
+        FileScanner fileScannerForProject = new FileScanner();
+        try {
+            HashSet<String> projectFilesList = fileScannerForProject.scanProjectFiles(Existing_Project_File_Path);
+            for(String txtFile : projectFilesList){
+                String p_nameTaken = takeExistingProjectName(txtFile);
+                updateProjectItems.add(p_nameTaken);
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        return updateProjectItems;
+    }
+    //to open a project, first the path of the project file must choose
+    public static String getProjectPath(String takenValue){
+        return Existing_Project_File_Path+takenValue+".txt";
+    }
+
+
+    //to get the configuration name using the project path in the getProjectPath() method
+    public String getConfigExtensionItem() {
+        String selectedConfigName = "";
+        //to represent the current file path
+        File file = new File(getProjectPath(takenValue));
+        if (file.exists()) {
+            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
+            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println("2");
+                    //to search the "Configuration Name" field in the file
+                    if (line.startsWith("Configuration Name:")) {
+                        System.out.println("3");
+                        System.out.println(line);
+                        selectedConfigName = line.substring(line.indexOf(":")+2);
+                        BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
+                        String lineExtension;
+                            try {
+                                while ((lineExtension = readerExtension.readLine()) != null){
+                                    System.out.println("4");
+                                    if(lineExtension.startsWith("Executable File Extension:")){
+                                        System.out.println("5");
+                                        selectedConfigExtension = lineExtension.substring(lineExtension.indexOf(":")+2);
+
+                                    }
+                                }
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("File cannot be found!");
+        }
+        return selectedConfigExtension;
+    }
+
+    //to get the configuration name using the project path in the getProjectPath() method
+    public String getCompilerPathItem() {
+        String selectedConfigName = "";
+        //to represent the current file path
+        File file = new File(getProjectPath(takenValue));
+        if (file.exists()) {
+            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
+            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+
+                    //to search the "Configuration Name" field in the file
+                    if (line.startsWith("Configuration Name:")) {
+                        System.out.println("3");
+                        System.out.println(line);
+                        selectedConfigName = line.substring(line.indexOf(":")+2);
+                        BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
+                        String lineExtension;
+                        try {
+                            while ((lineExtension = readerExtension.readLine()) != null){
+                                System.out.println("4");
+
+                                if(lineExtension.startsWith("Compiler Path:")){
+                                    System.out.println("5");
+                                    selectedCompilerPath = lineExtension.substring(lineExtension.indexOf(":")+2);
+                                }
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("File cannot be found!");
+        }
+        return selectedCompilerPath;
+    }
+
+    //to get the configuration name using the project path in the getProjectPath() method
+    public String getCompilerParamItem() {
+        String selectedConfigName = "";
+        //to represent the current file path
+        File file = new File(getProjectPath(takenValue));
+        if (file.exists()) {
+            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
+            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+
+                    //to search the "Configuration Name" field in the file
+                    if (line.startsWith("Configuration Name:")) {
+                        System.out.println("3");
+                        System.out.println(line);
+                        selectedConfigName = line.substring(line.indexOf(":")+2);
+                        BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
+                        String lineExtension;
+                        try {
+                            while ((lineExtension = readerExtension.readLine()) != null){
+                                System.out.println("4");
+
+                                if(lineExtension.startsWith("Compiler Parameters:")){
+                                    System.out.println("5");
+                                    selectedCompilerParam = lineExtension.substring(lineExtension.indexOf(":")+2);
+                                }
+                            }
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("File cannot be found!");
+        }
+        return selectedCompilerParam;
+    }
+    //to get the zip file path name using the project path in the getProjectPath() method
+    public static String getZipFilePathItem(String takenValue) {
+        String zipFilePath = "";
+        System.out.println("here");
+
+        //to represent the current file path
+        File file = new File(getProjectPath(takenValue));
+        System.out.println(getProjectPath(takenValue));
+        if (file.exists()) {
+            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
+            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println("here");
+                    //to search the "Zip File Path" field in the file
+                    if (line.startsWith("Zip File Path:")) {
+                        System.out.println("hereeeeee");
+                        zipFilePath = line.substring(line.indexOf(":")+2);
+                    }
+                }
+            } catch (IOException exception) {
+                System.out.println("An error occurred while searching for the specified value");
+                exception.printStackTrace();
+            }
+        } else {
+            System.out.println("File cannot be found!");
+        }
+        return zipFilePath;
+    }
+    public static String getOnlyZipName(){
+        String fullZipPath = getZipFilePathItem(takenValue);
+        return fullZipPath.substring(fullZipPath.lastIndexOf('\\')+ 1);
+    }
+    public static String getDirectoryPathWithoutZip() {
+        String fullZipPath = getZipFilePathItem(takenValue);
+        int lastIndex = fullZipPath.lastIndexOf('\\');
+        if (lastIndex != -1) {
+            return fullZipPath.substring(0, lastIndex);
+        } else {
+            return "";
+        }
+    }
+    //to get the zip file path name using the project path in the getProjectPath() method
+    public File getOutputFilePathItem(String takenValue) {
+        String outputFilePath = "";
+        //to represent the current file path
+        File file = new File(getProjectPath(takenValue));
+        if (file.exists()) {
+            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
+            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    //to search the "Output File" field in the file
+                    if (line.startsWith("Output File:")) {
+                        outputFilePath = line.substring(line.indexOf(":")+2);
+                    }
+                }
+            } catch (IOException exception) {
+                System.out.println("An error occurred while searching for the specified value");
+                exception.printStackTrace();
+            }
+        } else {
+            System.out.println("File cannot be found!");
+        }
+        return new File(outputFilePath);
+    }
+
+
+    //SWITCHING FUNCTIONS BETWEEN SCREENS
     public void newProjectButton(ActionEvent event) {
         System.out.println("New Project");
         try {
@@ -75,8 +345,6 @@ public class MainController {
             System.out.println("Can't open new window.");
         }
     }
-
-
 
 
 

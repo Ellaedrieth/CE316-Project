@@ -9,8 +9,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -35,18 +33,18 @@ public class ProjectController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         projectConfigMenu.getItems().addAll(defaultLang());
         projectConfigMenu.getItems().addAll(scanConfigFiles());
+        projectConfigMenu.setValue("Select Configuration Name");
         submissionZipBtn.setOnAction(event -> chooseSubmissionPath());
         outputBtn.setOnAction(event -> chooseOutputFile());
         projectGenBtn.setOnAction(event -> projectGenerateAct());
-
     }
-    public static String takeLang(String newConfigFileName){
+    public static String takeConfigName(String newConfigFileName){
         String languageValue = "";
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(newConfigFileName))){
             String line;
             while((line = bufferedReader.readLine()) != null){
-                if(line.startsWith("Programming Language: ")){
-                    languageValue = line.substring("Programming Language: ".length()).trim();
+                if(line.startsWith("Configuration Name: ")){
+                    languageValue = line.substring("Configuration Name: ".length()).trim();
                     break;
                 }
             }
@@ -61,7 +59,7 @@ public class ProjectController implements Initializable {
         try {
             HashSet<String> configFilesList = fileScannerForConfig.scanConfigFiles(CONFIG_FILE_PATH);
             for(String datFile : configFilesList){
-                String langTaken = takeLang(datFile);
+                String langTaken = takeConfigName(datFile);
                 newLangItems.add(langTaken);
             }
         } catch (IllegalAccessException e) {
@@ -153,7 +151,9 @@ public class ProjectController implements Initializable {
         } else{
             //save project
             saveProject(project_name, config_name, zip_file_path, output_file);
+
         }
+
     }
     public static String takeProjectName(String newProjectFileName){
         String ProjectVal = "";

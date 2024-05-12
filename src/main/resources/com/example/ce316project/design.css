@@ -14,3 +14,9 @@
     -fx-text-fill: #F2F0F2; /* Başlık metni rengi (örneğin, kırmızı) */
     -fx-font-size: 13px; /* Metin font boyutu */
 }
+.choice-box .text {
+    -fx-fill: white;
+}
+.text-field {
+    -fx-text-fill: white;
+}

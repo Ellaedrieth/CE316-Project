@@ -1,0 +1,5 @@
+Configuration Name: java
+Executable File Extension: java
+Programming Language: Java
+Compiler Parameters: javac fileName.java
+Execution Parameter: java fileName
