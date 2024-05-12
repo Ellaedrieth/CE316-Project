@@ -101,7 +101,7 @@ private static void extractCommand() throws IOException, InterruptedException {
         }
     }
     public static File compile(ArrayList<String> compSet, ArrayList<String> execSet) {
-        String outputFilePath = MainController.getDirectoryPathWithoutZip() + "\\output.txt";
+        String outputFilePath = MainController.getDirectoryPathWithoutZip() + "\\project_result_output.txt";
         File outputFile = new File(outputFilePath);
         try {
             if (outputFile.createNewFile()) {

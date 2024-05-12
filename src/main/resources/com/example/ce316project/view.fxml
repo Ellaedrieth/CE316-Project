@@ -19,7 +19,6 @@
                 <MenuButton fx:id="projectMenuBtn" layoutX="34.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#newProjectButton" text="New Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#openProjectButton" text="Open Project" />
                         <MenuItem mnemonicParsing="false" onAction="#editProjectButton" text="Edit Project" />
                     </items>
                     <graphic>
@@ -43,7 +42,7 @@
                 </MenuButton>
                 <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" wrappingWidth="23.0" />
                 <Line endX="349.3999938964844" endY="3.814697265625E-6" layoutX="101.0" layoutY="58.0" startX="-100.0" stroke="WHITE" />
-                <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="319.0" prefWidth="244.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: #FF0000;" stylesheets="@design.css">
+                <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="319.0" prefWidth="244.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: white;" stylesheets="@design.css">
                     <columns>
                         <TableColumn fx:id="studentCol" prefWidth="117.60004425048828" style="-fx-background-color: #080808;" text="Student ID" />
                         <TableColumn fx:id="resultCol" prefWidth="115.99993896484375" style="-fx-background-color: #080808;" text="Result" />
@@ -72,7 +71,7 @@
                         <Image url="@img_ieu.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="zipBtn" layoutX="144.0" layoutY="510.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" style="-fx-background-color: #101010;" text="Convert to ZIP file" textFill="WHITE">
+                <Button fx:id="zipBtn" layoutX="144.0" layoutY="535.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" style="-fx-background-color: #101010;" text="Convert to ZIP file" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -94,6 +93,11 @@
                      </font>
                   </FontIcon>
                </graphic></Button>
+            <Button fx:id="resultBtn" layoutX="114.0" layoutY="487.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #101010;" text="Show Results" textFill="WHITE">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
             </children></AnchorPane>
     </children>
 </StackPane>

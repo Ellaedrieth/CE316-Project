@@ -1,6 +1,7 @@
 package com.example.ce316project;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -36,6 +38,20 @@ public class MainController implements Initializable {
     String selectedCompilerPath = "";
     String selectedCompilerParam = "";
 
+    @FXML
+    private TableView<Student> resultTable;
+
+    @FXML
+    private TableColumn<Student,String> resultCol;
+
+    @FXML
+    private TableColumn<Student, Long> studentCol;
+
+    ObservableList<Student> stu_list= FXCollections.observableArrayList();
+    @FXML
+    public Button resultBtn;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         openProject.getItems().addAll(getProjectName());
@@ -49,6 +65,14 @@ public class MainController implements Initializable {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        resultBtn.setOnAction(actionEvent -> {
+            set_list();
+            studentCol.setCellValueFactory(new PropertyValueFactory<Student,Long>("student_id"));
+            resultCol.setCellValueFactory(new PropertyValueFactory<Student,String>("result"));
+            resultTable.setItems(stu_list);
+            resultTable.refresh();
         });
     }
 
@@ -319,6 +343,29 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             System.out.println("Can't open new window.");
         }
+    }
+    public void set_list() {
+        try {
+            String line;
+            File result_file = new File("src/main/java/com/example/ce316project/results.txt");
+            if (result_file.exists()) {
+                try{
+                    BufferedReader result = new BufferedReader(new FileReader(result_file));
+                    while ((line = result.readLine()) != null) {
+                        String[] data = line.split(" ");
+                        stu_list.add(new Student(data[1], data[0]));
+                    }
+
+                } catch(Exception e){
+                    System.out.println("Error occured while getting the result.Please check the file.");
+                }
+            }
+        }
+        catch(Exception e){
+            System.out.println("Result file did not found please check the folder");
+        }
+
+
     }
 
 

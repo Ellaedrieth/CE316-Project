@@ -20,3 +20,9 @@
 .text-field {
     -fx-text-fill: white;
 }
+.choice-box .context-menu .label {
+    -fx-base: #93be89;
+}
+.choice-box  .label {
+    -fx-base: #93be89;
+}

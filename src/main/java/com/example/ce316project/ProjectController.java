@@ -2,7 +2,9 @@ package com.example.ce316project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -24,6 +26,8 @@ public class ProjectController implements Initializable {
     TextField submissionTextField,outputTextField,projectNameTextField;
     @FXML
     ChoiceBox<String> projectConfigMenu;
+    @FXML
+
     //to access the object from the ConfigController class; reference
     HashSet<String> progLanItems = new HashSet<>();
     static HashSet<String> newLangItems = new HashSet<>();
@@ -31,12 +35,12 @@ public class ProjectController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        projectConfigMenu.getItems().addAll(defaultLang());
+        //projectConfigMenu.getItems().addAll(defaultLang());
         projectConfigMenu.getItems().addAll(scanConfigFiles());
         projectConfigMenu.setValue("Select Configuration Name");
         submissionZipBtn.setOnAction(event -> chooseSubmissionPath());
         outputBtn.setOnAction(event -> chooseOutputFile());
-        projectGenBtn.setOnAction(event -> projectGenerateAct());
+        projectGenBtn.setOnAction(event -> { projectGenerateAct()   ;   });
     }
     public static String takeConfigName(String newConfigFileName){
         String languageValue = "";
@@ -68,11 +72,11 @@ public class ProjectController implements Initializable {
         return newLangItems;
     }
 
-    public ObservableList<String>  defaultLang(){
-        progLanItems.add("java");
-        progLanItems.add("python");
-        return FXCollections.observableArrayList(progLanItems);
-    }
+//    public ObservableList<String>  defaultLang(){
+//        progLanItems.add("java");
+//        progLanItems.add("python");
+//        return FXCollections.observableArrayList(progLanItems);
+//    }
 
     public void chooseSubmissionPath() {
         FileChooser fileChooser = new FileChooser();
