@@ -44,12 +44,8 @@ public class MainController implements Initializable {
         runBtn.setOnAction(event -> {
             takenValue = openProject.getValue();
             try {
-                Comparison.compareFiles
-                        (Compilation_Interpretation.compile(
-                                Compilation_Interpretation.compilationFileReg(
-                                        Compilation_Interpretation.zipFileExtraction()),
-                                Compilation_Interpretation.executionFileReg(Compilation_Interpretation.zipFileExtraction())),
-                                getOutputFilePathItem(takenValue));
+                Comparison.compareFileContents(Compilation_Interpretation.compile(Compilation_Interpretation.compilationFileReg(Compilation_Interpretation.zipFileExtraction()),
+                        Compilation_Interpretation.executionFileReg(Compilation_Interpretation.zipFileExtraction())),getOutputFilePathItem(takenValue) );
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -239,7 +235,7 @@ public class MainController implements Initializable {
         }
     }
     //to get the zip file path name using the project path in the getProjectPath() method
-    public File getOutputFilePathItem(String takenValue) {
+    public static File getOutputFilePathItem(String takenValue) {
         String outputFilePath = "";
         //to represent the current file path
         File file = new File(getProjectPath(takenValue));

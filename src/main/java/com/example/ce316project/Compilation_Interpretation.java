@@ -26,24 +26,16 @@ public class Compilation_Interpretation {
                 ZipEntry zipEntry = entries.nextElement();
                 if (!zipEntry.isDirectory()) {
                     String entryName = zipEntry.getName(); //a.java
-                    System.out.println(entryName);
                     String extension = entryName.substring(entryName.lastIndexOf(".") + 1);
-                    System.out.println(extension);
-                    System.out.println(mainController.getConfigExtensionItem());
                     mainController.getConfigExtensionItem();
-                    System.out.println(mainController.getConfigExtensionItem());
                     if (extension.equalsIgnoreCase(mainController.getConfigExtensionItem())) {
                         int datIndex = entryName.indexOf('.');
                         String nameFile = entryName.substring(0, datIndex);
                         compileFileSet.add(nameFile);
-                        System.out.println(compileFileSet);
                     }
                 }
             }
-            Alert validationError = new Alert(Alert.AlertType.INFORMATION);
-            validationError.setTitle("The Extraction Message");
-            validationError.setHeaderText("The extraction of the zip file is successfully completed.");
-            validationError.showAndWait();
+
         }
         catch (IOException e){
             System.err.println("Error while reading zip file: " + e.getMessage());
@@ -74,6 +66,11 @@ private static void extractCommand() throws IOException, InterruptedException {
     mkdirProcess.waitFor(); // Wait to complete the mkdir command.
 
     unZipFiles(directoryPath + "\\"+zipFileName, MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
+
+    Alert validationError = new Alert(Alert.AlertType.INFORMATION);
+    validationError.setTitle("The Extraction Message");
+    validationError.setHeaderText("The extraction of the zip file is successfully completed.");
+    validationError.showAndWait();
 }
 
 
@@ -144,7 +141,6 @@ private static void extractCommand() throws IOException, InterruptedException {
                         long startTime = System.currentTimeMillis();
                         long timeout = 3000; // 3 saniye
                         while ((line = reader.readLine()) != null) {
-                            System.out.println("Output: " + line); // Print to the console
                             writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
                             writer.flush();
                         }
@@ -164,7 +160,6 @@ private static void extractCommand() throws IOException, InterruptedException {
                     long startTime = System.currentTimeMillis();
                     long timeout = 3000; // 3 saniye
                     while ((line = reader.readLine()) != null) {
-                        System.out.println("Output: " + line); // Print to the console
                         writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
                         writer.flush();
                     }
