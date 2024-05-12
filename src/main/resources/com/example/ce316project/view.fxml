@@ -31,7 +31,7 @@
                 <MenuButton fx:id="configMenuBtn" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Configuration" textFill="WHITE">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#newConfigurationButton" text="New Configuration" />
-                        <MenuItem mnemonicParsing="false" text="Open Configuration" />
+                        <MenuItem mnemonicParsing="false" onAction="#openConfigurationButton" text="Open Configuration" />
                     </items>
                     <graphic>
                         <FontIcon fx:id="config" iconColor="#8aff84" iconSize="20" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-sun;" />
