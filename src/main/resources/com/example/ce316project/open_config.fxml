@@ -8,7 +8,7 @@
     <children>
         <AnchorPane maxHeight="658.0" maxWidth="572.0" prefHeight="650.0" prefWidth="572.0" style="-fx-background-color: black; -fx-max-width: 900; -fx-max-height: 900;">
             <children>
-                <Label layoutX="40.0" layoutY="106.0" style="-fx-text-fill: white;" text="Configuration Name:" textFill="WHITE" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="106.0">
+                <Label layoutX="40.0" layoutY="106.0" style="-fx-text-fill: white;" text="Configuration Name (non-editable):" textFill="WHITE" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="106.0">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -24,13 +24,13 @@
                     </font>
                 </Label>
                 <TextField fx:id="progLangBar" layoutX="40.0" layoutY="297.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="297.0" />
-                <TextField fx:id="configNameBar" layoutX="40.0" layoutY="147.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="476.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="147.0" />
+                <TextField fx:id="configNameBar" editable="false" layoutX="40.0" layoutY="147.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: black; -fx-border-color: grey;" AnchorPane.bottomAnchor="476.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="147.0" />
                 <Label layoutX="51.0" layoutY="325.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" textFill="WHITE" AnchorPane.bottomAnchor="305.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="325.0">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Button fx:id="genButton" layoutX="171.0" layoutY="506.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="EDIT" textFill="WHITE" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="506.0" />
+                <Button fx:id="editButton" layoutX="171.0" layoutY="506.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="EDIT" textFill="WHITE" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="506.0" />
                 <TextField fx:id="execFileBar" layoutX="40.0" layoutY="226.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: black; -fx-border-color: grey;" />
                 <TextField fx:id="compParamBar" layoutX="40.0" layoutY="378.0" prefHeight="27.0" prefWidth="422.0" style="-fx-background-color: black; -fx-border-color: grey;" />
                 <Label layoutX="40.0" layoutY="344.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Compiler Parameters" textFill="WHITE">
@@ -50,6 +50,7 @@
                <font>
                   <Font size="14.0" />
                </font></Label>
+            <Button fx:id="deleteButton" layoutX="73.0" layoutY="72.0" mnemonicParsing="false" text="Delete" />
             </children>
         </AnchorPane>
 

@@ -1,25 +1,18 @@
 package com.example.ce316project;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class OpenConfigController implements Initializable {
     @FXML
-    Button openButton;
+    Button openButton, deleteButton;
     @FXML
     TextField inputBar;
     @FXML
@@ -31,17 +24,16 @@ public class OpenConfigController implements Initializable {
     @FXML
     TextField compParamBar;
     @FXML
-    Button genButton;
+    Button editButton;
     @FXML
     TextField execFileBar;
-
-
-
-
     String configName;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         openButton.setOnAction(actionEvent -> getConfigInfo());
+        editButton.setOnAction(actionEvent -> setNewConfigInfo());
+        deleteButton.setOnAction(actionEvent -> deleteConfiguration());
     }
     public void getConfigInfo(){
         configName = inputBar.getText() + ".dat";
@@ -87,9 +79,64 @@ public class OpenConfigController implements Initializable {
             }
         }
     }
+    public void setNewConfigInfo(){
+        //FOR THE VALUES FROM THE CONFIG SCREEN
+        String configurationNameVal = configNameBar.getText();
+        String executionParameter = execParamBar.getText();
+        String compilerParametersVal = compParamBar.getText();
+        String extensionVal = execFileBar.getText();
+        String languageVal = progLangBar.getText();
+        if (configurationNameVal.isEmpty() || executionParameter.isEmpty() || compilerParametersVal.isEmpty() || extensionVal.isEmpty() || languageVal.isEmpty()) {
+            Alert validationError = new Alert(Alert.AlertType.ERROR);
+            validationError.setTitle("Validation Error");
+            validationError.setHeaderText("Please fill in all required fields.");
+            validationError.showAndWait();
+        }
+        else{
+            //save configuration
+            editConfiguration(configurationNameVal, extensionVal, languageVal, compilerParametersVal,executionParameter);
+        }
+    }
+    public void editConfiguration(String configName, String extension, String language,String compilerParameter, String executionParameter) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream("src/main/resources/com/example/ce316project/"+configName + ".dat")) {
+            StringBuilder newConfigData = new StringBuilder(); //using StringBuilder is more effective from the point of memory usage
+            newConfigData.append("Configuration Name: ").append(configName).append("\n");
+            newConfigData.append("Executable File Extension: ").append(extension).append("\n");
+            newConfigData.append("Programming Language: ").append(language).append("\n");
+            newConfigData.append("Compiler Parameters: ").append(compilerParameter).append("\n");
+            newConfigData.append("Execution Parameter: ").append(executionParameter).append("\n");
 
 
+            fileOutputStream.write(newConfigData.toString().getBytes(StandardCharsets.UTF_8));
 
-
-
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Success");
+            successAlert.setHeaderText("Configuration saved successfully!");
+            successAlert.showAndWait();
+        } catch (IOException e) {
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("An error occurred while saving the configuration.");
+            errorAlert.setContentText(e.getMessage());
+            errorAlert.showAndWait();
+        }
+    }
+    public void deleteConfiguration(){
+        configName = inputBar.getText() + ".dat";
+        String path = "src/main/resources/com/example/ce316project/"+configName;
+        File file = new File(path);
+        if(file.exists()){
+            if(file.delete()){
+                System.out.println("File deleted.");
+                inputBar.setText("CONFIGURATION IS DELETED!");
+            }
+        }
+        else{
+            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+            errorAlert.setTitle("Error");
+            errorAlert.setHeaderText("An error occurred while saving the configuration.");
+            errorAlert.setContentText("Hey!");
+            errorAlert.showAndWait();
+        }
+    }
 }

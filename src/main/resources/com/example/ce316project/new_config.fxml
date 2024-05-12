@@ -4,41 +4,47 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ConfigController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ConfigController">
     <children>
         <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;">
             <children>
-                <Label layoutX="40.0" layoutY="42.0" style="-fx-text-fill: white;" text="Configuration Name" textFill="WHITE" AnchorPane.bottomAnchor="574.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="42.0">
+                <Label layoutX="41.0" layoutY="129.0" style="-fx-text-fill: white;" text="Configuration Name" textFill="WHITE" AnchorPane.bottomAnchor="487.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="228.0" AnchorPane.topAnchor="129.0">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Label layoutX="40.0" layoutY="125.0" prefHeight="20.0" prefWidth="95.0" style="-fx-text-fill: white;" text="Executable File Extension" textFill="WHITE" AnchorPane.bottomAnchor="505.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="125.0">
+                <Label layoutX="41.0" layoutY="212.0" prefHeight="20.0" prefWidth="95.0" style="-fx-text-fill: white;" text="Executable File Extension" textFill="WHITE" AnchorPane.bottomAnchor="418.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="228.0" AnchorPane.topAnchor="212.0">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="configNameField" layoutX="40.0" layoutY="83.0" prefHeight="26.0" prefWidth="371.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="83.0" />
-                <Button fx:id="generateConfigBtn" layoutX="171.0" layoutY="450.0" mnemonicParsing="false" onAction="#configGenAct" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="152.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="171.0" AnchorPane.topAnchor="450.0" />
-                <TextField fx:id="extensionInput" layoutX="40.0" layoutY="162.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
-            <TextField fx:id="compilerParametersInput" layoutX="40.0" layoutY="325.0" prefHeight="27.0" prefWidth="329.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
-            <Label layoutX="39.0" layoutY="292.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Compiler Parameters (e.g. javac fileName.java), if needed" textFill="WHITE">
+                <TextField fx:id="configNameField" layoutX="41.0" layoutY="170.0" prefHeight="26.0" prefWidth="371.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" AnchorPane.bottomAnchor="453.0" AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="170.0" />
+                <Button fx:id="generateConfigBtn" layoutX="172.0" layoutY="537.0" mnemonicParsing="false" onAction="#configGenAct" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="537.0" />
+                <TextField fx:id="extensionInput" layoutX="41.0" layoutY="249.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
+            <TextField fx:id="compilerParametersInput" layoutX="41.0" layoutY="412.0" prefHeight="27.0" prefWidth="329.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
+            <Label layoutX="40.0" layoutY="379.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Compiler Parameters (e.g. javac fileName.java), if needed" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="203.0" prefHeight="20.0" prefWidth="166.0" style="-fx-text-fill: white;" text="Programming Language" textFill="WHITE">
+            <Label layoutX="41.0" layoutY="290.0" prefHeight="20.0" prefWidth="166.0" style="-fx-text-fill: white;" text="Programming Language" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="languageInput" layoutX="40.0" layoutY="240.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
-            <TextField fx:id="executionParameterInput" layoutX="40.0" layoutY="407.0" prefHeight="27.0" prefWidth="329.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
-            <Label layoutX="39.0" layoutY="374.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Execution Parameters (e.g. java fileName)" textFill="WHITE">
+            <TextField fx:id="languageInput" layoutX="41.0" layoutY="327.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
+            <TextField fx:id="executionParameterInput" layoutX="41.0" layoutY="494.0" prefHeight="27.0" prefWidth="329.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
+            <Label layoutX="40.0" layoutY="461.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Execution Parameters (e.g. java fileName)" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
+            <TextArea editable="false" layoutX="40.0" layoutY="12.0" prefHeight="111.0" prefWidth="370.0" style="-fx-background-color: black;" text="CAUTION!!!&#10;PLEASE ENTER YOUR PARAMETERS AS SHOWN BELOW.&#10;ALL THE FILE NAMES MUST BE WRITTEN AS                   &#10;FORM!&#10;THIS HAS THE UPMOST IMPORTANCE! PLEASE REFER TO &#10;EXISTING JAVA CONFIGURATION!" />
+            <Text fill="RED" layoutX="286.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="&quot;fileName&quot;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
             </children>
         </AnchorPane>
 

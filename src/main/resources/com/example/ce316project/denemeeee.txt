@@ -1,4 +1,0 @@
-Project Name: denemeeee
-Configuration Name: java
-Zip File Path: C:\Users\HP\Downloads\test.zip
-Output File: C:\Users\HP\Downloads\output (1).txt

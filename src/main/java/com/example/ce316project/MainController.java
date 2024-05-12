@@ -68,6 +68,7 @@ public class MainController implements Initializable {
         });
 
         resultBtn.setOnAction(actionEvent -> {
+            resultTable.getItems().clear();
             set_list();
             studentCol.setCellValueFactory(new PropertyValueFactory<Student,Long>("student_id"));
             resultCol.setCellValueFactory(new PropertyValueFactory<Student,String>("result"));
@@ -164,76 +165,6 @@ public class MainController implements Initializable {
         return selectedConfigExtension;
     }
 
-    //to get the configuration name using the project path in the getProjectPath() method
-    public String getCompilerPathItem() {
-        String selectedConfigName = "";
-        //to represent the current file path
-        File file = new File(getProjectPath(takenValue));
-        if (file.exists()) {
-            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
-            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-
-                    //to search the "Configuration Name" field in the file
-                    if (line.startsWith("Configuration Name:")) {
-                        selectedConfigName = line.substring(line.indexOf(":")+2);
-                        BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
-                        String lineExtension;
-                        try {
-                            while ((lineExtension = readerExtension.readLine()) != null){
-                                if(lineExtension.startsWith("Compiler Path:")){
-                                    selectedCompilerPath = lineExtension.substring(lineExtension.indexOf(":")+2);
-                                }
-                            }
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            System.out.println("File cannot be found!");
-        }
-        return selectedCompilerPath;
-    }
-
-    //to get the configuration name using the project path in the getProjectPath() method
-    public String getCompilerParamItem() {
-        String selectedConfigName = "";
-        //to represent the current file path
-        File file = new File(getProjectPath(takenValue));
-        if (file.exists()) {
-            //Runtime.getRuntime().exec("cmd /c start " + getProjectPath());
-            try (BufferedReader reader = new BufferedReader(new FileReader(getProjectPath(takenValue)))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    //to search the "Configuration Name" field in the file
-                    if (line.startsWith("Configuration Name:")) {
-                        selectedConfigName = line.substring(line.indexOf(":")+2);
-                        BufferedReader readerExtension = new BufferedReader(new FileReader(Existing_Project_File_Path+selectedConfigName+".dat"));
-                        String lineExtension;
-                        try {
-                            while ((lineExtension = readerExtension.readLine()) != null){
-                                if(lineExtension.startsWith("Compiler Parameters:")){
-                                    selectedCompilerParam = lineExtension.substring(lineExtension.indexOf(":")+2);
-                                }
-                            }
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            System.out.println("File cannot be found!");
-        }
-        return selectedCompilerParam;
-    }
     //to get the zip file path name using the project path in the getProjectPath() method
     public static String getZipFilePathItem(String takenValue) {
         String zipFilePath = "";
