@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #000000;">
             <children>
-                <Button layoutX="338.0" layoutY="14.0" minWidth="68.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #0000;" textFill="WHITE">
+                <Button fx:id="helpButton" layoutX="338.0" layoutY="14.0" minWidth="68.0" mnemonicParsing="false" onAction="#helpButtonClicked" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #0000;" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -40,7 +40,7 @@
                         <Font size="14.0" />
                     </font>
                 </MenuButton>
-                <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" wrappingWidth="23.0" />
+                <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" text="" wrappingWidth="23.0" />
                 <Line endX="349.3999938964844" endY="3.814697265625E-6" layoutX="101.0" layoutY="58.0" startX="-100.0" stroke="WHITE" />
                 <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="319.0" prefWidth="244.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: white;" stylesheets="@design.css">
                     <columns>
@@ -61,7 +61,7 @@
                         <Font name="System Bold" size="13.0" />
                     </font>
                 </Text>
-                <Text fill="#948d8d" layoutX="369.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Team #4">
+                <Text fill="#948d8d" layoutX="237.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Developed with ♥ by #TeamSlay" wrappingWidth="191.71435546875">
                     <font>
                         <Font size="13.0" />
                     </font>

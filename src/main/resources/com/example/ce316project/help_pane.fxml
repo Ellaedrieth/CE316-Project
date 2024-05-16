@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text fill="WHITE" layoutX="94.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to #TeamSlay's Integrated Assignment Environment!" textAlignment="CENTER" wrappingWidth="257.13671875">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Text>
+      <Text fill="RED" layoutX="19.0" layoutY="142.0" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Please read the instructions given below carefully!" wrappingWidth="411.13671875">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <TextArea editable="false" layoutX="4.0" layoutY="216.0" prefHeight="424.0" prefWidth="434.0" styleClass="custom" stylesheets="@design.css" text="1) Project Section:&#10;You can access Project Section via clicking on the Project button on the upper left corner of the screen. There are two sub-buttons: New Project and Edit Project. You can access to project creation screen by clicking on the New Project button , or access to project editing screen by clicking on the Edit Project button.&#10; 1.a) New Project Button: &#10;  Once you accessed to this screen, you can create a new project by entering the necessary information, selecting a configuration, and providing necessary submission and expected output files. Please note that the submission file must be a .zip file, and the expected output file must be a .txt file. At the end, you need to click on the Generate button.&#10; 1.b) Edit Project Button: &#10;  Once you accessed to this screen, first, you need to click &quot;Open&quot; button and select your corresponding project file. Then, the information of it will be displayed automatically. Next, you can change whatever information you want. At the end, you need to click on the Edit &amp; Save button.&#10;2) Configuration Section:&#10;You can access Project Section via clicking on the Project button on the upper left corner of the screen. There are two sub-buttons: New Configuration and Open Configuration. You can access to configuration creation screen by clicking on the New Configuration button , or access to configuration editing screen by clicking on the Open Configuration button.&#10; 2.a) New Configuration Button:&#10;  Once you opened this screen, you can create a new configuration by entering the necessary information. Please note that the compiler parameters section must be entered as NULL if the corresponding programming language has an interpreter and does not need to be compiled, e.g. Python. Please refer to the following entering information scenarios: java -&gt; java -&gt; Java -&gt; javac fileName.java -&gt; java fileName &#10;python -&gt; py -&gt; Python -&gt; NULL -&gt; py fileName.py&#10;At the end, you need to click on the Generate button.&#10; 2.b) Open Configuration Button:&#10;  Once you opened this screen, first, you need to write the name of the configuration you want to edit or delete. After writing, press Open button and the configuration's information will be displayed automatically. From this moment, either you can click on the Delete button to delete the configuration, or change the fields given below but name field.&#10;3) Main Screen:&#10;This screen automatically opens when the program is started. There is a bar to let you to choose an existing project to run, a table to show each student's result, the &quot;Run&quot; button to run the selected project, the &quot;Refresh&quot; button to refresh the project list (please note that you need to press Refresh each time you create a new project), the &quot;Show Results&quot; and the &quot;Convert to Zip File&quot; button to convert each student's result in separate .zip files. A full scenario in main screen may be as follows: Press &quot;Refresh&quot; button -&gt; select a project from the list -&gt; Press &quot;Run&quot; button to run the project -&gt; press &quot;Show Results&quot; button to see the results -&gt; press &quot;Convert to Zip File&quot; button to receive corresponding .zip files.&#10;4) Additional Notes:&#10;Please refer to the given example .zip files within the project. Submission file must have only submitted program files that have each student's name, e.g., the .zip must only contain a.java, b.java, c.java, d.java and no other folders, files, etc. ; a, b, c, d are students' names. &#10;   &#10;" wrapText="true">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font></TextArea>
+   </children>
+</AnchorPane>

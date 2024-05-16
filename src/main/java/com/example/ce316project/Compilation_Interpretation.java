@@ -126,7 +126,7 @@ private static void extractCommand() throws IOException, InterruptedException {
         }
         size = execSet.size();
         try{
-            if (!compSet.isEmpty()) {
+            if (!compSet.contains("NULL")) {
                 int i = 0;
                 int j = 0;
                 while (i < compSet.size() && j < execSet.size()) {

@@ -35,9 +35,9 @@ public class MainController implements Initializable {
     static HashSet<String> updateProjectItems = new HashSet<>();
     static String takenValue;
     String selectedConfigExtension = "";
-    String selectedCompilerPath = "";
-    String selectedCompilerParam = "";
 
+    @FXML
+    Button helpButton;
     @FXML
     private TableView<Student> resultTable;
 
@@ -75,7 +75,6 @@ public class MainController implements Initializable {
             resultTable.setItems(stu_list);
             resultTable.refresh();
         });
-
     }
     public void openConfigurationButton(ActionEvent event) {
         System.out.println("You clicked New Configuration");
@@ -90,7 +89,23 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             System.out.println("Can't open new window.");
         }
+
     }
+    public void helpButtonClicked(ActionEvent event) {
+        System.out.println("You clicked Help");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("help_pane.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL); // Disables main window until this one is closed
+            stage.setTitle("Help");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Can't open new window.");
+        }
+    }
+
     public void refreshProjectList(){
         openProject.getItems().clear();
         openProject.getItems().addAll(getProjectName());
