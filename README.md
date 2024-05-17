@@ -1,6 +1,6 @@
 Hello everyone,
 
-This project has been created by İzmir University of Economics students **Büşra Yılmaz**, **Sedat Nail Ersoy**, and** Ayça Dernek** for the course **CE 316**, Programming Paradigms. 
+This project has been created by İzmir University of Economics students **Büşra Yılmaz**, **Sedat Nail Ersoy**, and **Ayça Dernek** for the course **CE 316**, Programming Paradigms. 
 
 The project aims to create an **Integrated Assignment Environment (IAE) management system** using various technologies. The primary goal is to compile the students' code according to a new assignment created 
 by the instructor, and then compare it with the output file prepared by the lecturer. 
