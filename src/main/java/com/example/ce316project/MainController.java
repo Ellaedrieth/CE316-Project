@@ -18,6 +18,8 @@ import java.io.*;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 
 public class MainController implements Initializable {
@@ -49,7 +51,7 @@ public class MainController implements Initializable {
 
     ObservableList<Student> stu_list= FXCollections.observableArrayList();
     @FXML
-    public Button resultBtn;
+    public Button resultBtn, zipBtn;
 
 
     @Override
@@ -75,6 +77,7 @@ public class MainController implements Initializable {
             resultTable.setItems(stu_list);
             resultTable.refresh();
         });
+        zipBtn.setOnAction(event -> convertToZip());
     }
     public void openConfigurationButton(ActionEvent event) {
         System.out.println("You clicked New Configuration");
@@ -260,20 +263,6 @@ public class MainController implements Initializable {
         }
     }
 
-    public void openProjectButton(ActionEvent event) {
-        System.out.println("You clicked Open Project");
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("open_project.fxml"));
-            Parent root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL); // Disables main window until this one is closed
-            stage.setTitle("Open Project");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Can't open new window.");
-        }
-    }
 
     public void editProjectButton(ActionEvent event) {
         System.out.println("You clicked Edit Project");
@@ -324,10 +313,41 @@ public class MainController implements Initializable {
         catch(Exception e){
             System.out.println("Result file did not found please check the folder");
         }
-
-
     }
+    public void convertToZip(){
+        if(stu_list.isEmpty()){
+            Alert emptyWarning = new Alert(Alert.AlertType.WARNING);
+            emptyWarning.setTitle("Not Any Student Value");
+            emptyWarning.setHeaderText("The table view of the students' results is empty!");
+            emptyWarning.showAndWait();
+        }
+        else{
+            String zipFilePath = getDirectoryPathWithoutZip()+"\\students_zip";
+            File zipDirectory = new File(zipFilePath);
+            if(!zipDirectory.exists()){
+                zipDirectory.mkdir();
+            }
+            for(Student students : stu_list){
+                String zipFileName = zipFilePath + "\\" + students.getStudent_id() + ".zip";
+                try(ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFileName))) {
+                    ZipEntry zipEntry = new ZipEntry(students.getStudent_id()+".txt");
+                    zipOutputStream.putNextEntry(zipEntry);
 
+                    byte[] studentData = students.getResult().getBytes();
+                    zipOutputStream.write(studentData,0, studentData.length);
+                    zipOutputStream.closeEntry();
 
+                    System.out.println("Zipped the file: " + zipFileName);
 
+                } catch (IOException e) {
+                    System.out.println("There is an error while creating the zip.");
+                    throw new RuntimeException(e);
+                }
+            }
+            Alert emptyWarning = new Alert(Alert.AlertType.INFORMATION);
+            emptyWarning.setTitle("ZIP file process of each student");
+            emptyWarning.setHeaderText("The ZIP file process of each student is completed successfully!");
+            emptyWarning.showAndWait();
+        }
+    }
 }

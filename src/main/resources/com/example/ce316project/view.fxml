@@ -19,7 +19,6 @@
                 <MenuButton fx:id="projectMenuBtn" layoutX="34.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#newProjectButton" text="New Project" />
-                        <MenuItem mnemonicParsing="false" onAction="#editProjectButton" text="Edit Project" />
                     </items>
                     <graphic>
                         <FontIcon fx:id="project" iconColor="#a8ffe0" iconSize="15" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-project-diagram;" />
