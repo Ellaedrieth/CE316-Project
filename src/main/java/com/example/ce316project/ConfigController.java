@@ -41,6 +41,13 @@ public class ConfigController implements Initializable {
         else{
             //save configuration
             saveConfiguration(configurationNameVal, extensionVal, languageVal, compilerParametersVal,executionParameter);
+
+            //deleting the entering values on the new config screen
+            configNameField.setText(null);
+            extensionInput.setText(null);
+            languageInput.setText(null);
+            executionParameterInput.setText(null);
+            compilerParametersInput.setText(null);
         }
     }
 

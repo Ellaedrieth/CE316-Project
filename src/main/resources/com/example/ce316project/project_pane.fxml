@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ProjectController">
+<AnchorPane fx:id="projectPaneScreen" prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: black; -fx-max-width: 450; -fx-max-height: 650;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.ProjectController">
     <children>
         <Label layoutX="47.0" layoutY="57.0" style="-fx-text-fill: white;" text="Project Name" textFill="WHITE" AnchorPane.bottomAnchor="556.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="60.0">
             <font>
@@ -16,7 +16,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button layoutX="339.0" layoutY="181.0" mnemonicParsing="false" style="-fx-background-color: #1e90ff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="443.0" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.0" />
+        <Button fx:id="createConfigOnProjectPane" layoutX="339.0" layoutY="181.0" mnemonicParsing="false" onAction="#newConfigurationButtonOnProjectPane" style="-fx-background-color: #1e90ff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="443.0" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.0" />
         <Label layoutX="47.0" layoutY="239.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Submission Zip File" textFill="WHITE" AnchorPane.bottomAnchor="395.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="235.0">
             <font>
                 <Font size="14.0" />

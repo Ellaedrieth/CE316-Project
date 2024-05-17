@@ -45,7 +45,8 @@ public class OpenConfigController implements Initializable {
             successAlert.setTitle("Configuration File Name Error");
             successAlert.setHeaderText("File name is not valid.");
             successAlert.showAndWait();
-            configNameBar.setText("");
+            configNameBar.setText(null);
+            inputBar.setText(null);
         }
         else{
             try {
@@ -73,6 +74,7 @@ public class OpenConfigController implements Initializable {
                         execParamBar.setText(configName);
                     }
                 }
+                inputBar.setText(null);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -95,6 +97,12 @@ public class OpenConfigController implements Initializable {
         else{
             //save configuration
             editConfiguration(configurationNameVal, extensionVal, languageVal, compilerParametersVal,executionParameter);
+            //deleting the entering values on the open config screen
+            configNameBar.setText(null);
+            execFileBar.setText(null);
+            progLangBar.setText(null);
+            compParamBar.setText(null);
+            execParamBar.setText(null);
         }
     }
     public void editConfiguration(String configName, String extension, String language,String compilerParameter, String executionParameter) {

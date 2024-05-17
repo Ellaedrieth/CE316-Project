@@ -1,15 +1,19 @@
 package com.example.ce316project;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
@@ -27,7 +31,7 @@ public class ProjectController implements Initializable {
     @FXML
     ChoiceBox<String> projectConfigMenu;
     @FXML
-
+    AnchorPane projectPaneScreen;
     //to access the object from the ConfigController class; reference
     HashSet<String> progLanItems = new HashSet<>();
     static HashSet<String> newLangItems = new HashSet<>();
@@ -40,7 +44,11 @@ public class ProjectController implements Initializable {
         projectConfigMenu.setValue("Select Configuration Name");
         submissionZipBtn.setOnAction(event -> chooseSubmissionPath());
         outputBtn.setOnAction(event -> chooseOutputFile());
-        projectGenBtn.setOnAction(event -> { projectGenerateAct()   ;   });
+        projectGenBtn.setOnAction(event -> {
+            projectGenerateAct();
+
+           }
+        );
     }
     public static String takeConfigName(String newConfigFileName){
         String languageValue = "";
@@ -142,7 +150,7 @@ public class ProjectController implements Initializable {
         String output_file = outputTextField.getText();
         scanProjectFiles();
 
-        if (project_name.isEmpty() || projectConfigMenu.getValue()==null || zip_file_path.isEmpty() || output_file.isEmpty()) {
+        if (project_name.isEmpty() || projectConfigMenu.getSelectionModel().getSelectedItem()==null || projectConfigMenu.getSelectionModel().getSelectedItem().equals("Select Configuration Name") | zip_file_path.isEmpty() || output_file.isEmpty()) {
             Alert validationError = new Alert(Alert.AlertType.ERROR);
             validationError.setTitle("Validation Error");
             validationError.setHeaderText("Please fill in all required fields.");
@@ -156,6 +164,11 @@ public class ProjectController implements Initializable {
             //save project
             saveProject(project_name, config_name, zip_file_path, output_file);
 
+            //deleting the entering values on the new project screen
+            projectNameTextField.setText(null);
+            projectConfigMenu.setValue("Select Configuration Name");
+            submissionTextField.setText(null);
+            outputTextField.setText(null);
         }
 
     }
@@ -187,6 +200,26 @@ public class ProjectController implements Initializable {
             throw new RuntimeException(e);
         }
         return ProjectItems;
+    }
+
+    public void newConfigurationButtonOnProjectPane(ActionEvent event) {
+        System.out.println("You clicked New Configuration on the Project Pane screen");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("new_config.fxml"));
+            Parent root1 = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL); // Disables main window until this one is closed
+            stage.setTitle("New Configuration");
+            stage.setScene(new Scene(root1));
+            stage.show();
+
+            //close the current window
+            Stage currentStage = (Stage) projectPaneScreen.getScene().getWindow();
+            currentStage.close();
+
+        } catch (Exception e) {
+            System.out.println("Can't open new window.");
+        }
     }
 
 
