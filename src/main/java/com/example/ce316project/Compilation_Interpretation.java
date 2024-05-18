@@ -2,6 +2,7 @@ package com.example.ce316project;
 import javafx.scene.control.Alert;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -48,31 +49,30 @@ public class Compilation_Interpretation {
     }
 
 
-private static void extractCommand() throws IOException, InterruptedException {
-    String directoryPath = MainController.getDirectoryPathWithoutZip();
-    String zipFileName = MainController.getOnlyZipName();
+    private static void extractCommand() throws IOException, InterruptedException {
+        String directoryPath = MainController.getDirectoryPathWithoutZip();
+        String zipFileName = MainController.getOnlyZipName();
 
-    // 1. Process Builder for cd command
-    ProcessBuilder cdProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "cd", directoryPath);
-    cdProcessBuilder.redirectErrorStream(true);
-    Process cdProcess = cdProcessBuilder.start();
-    cdProcess.waitFor(); // Wait to complete the cd command.
+        // 1. Process Builder for cd command
+        ProcessBuilder cdProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "cd", directoryPath);
+        cdProcessBuilder.redirectErrorStream(true);
+        Process cdProcess = cdProcessBuilder.start();
+        cdProcess.waitFor(); // Wait to complete the cd command.
 
-    // 2. Process Builder for mkdir command
-    ProcessBuilder mkdirProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "mkdir", "extractedFiles");
-    mkdirProcessBuilder.directory(new File(directoryPath));
-    mkdirProcessBuilder.redirectErrorStream(true);
-    Process mkdirProcess = mkdirProcessBuilder.start();
-    mkdirProcess.waitFor(); // Wait to complete the mkdir command.
+        // 2. Process Builder for mkdir command
+        ProcessBuilder mkdirProcessBuilder = new ProcessBuilder("cmd.exe", "/c", "mkdir", "extractedFiles");
+        mkdirProcessBuilder.directory(new File(directoryPath));
+        mkdirProcessBuilder.redirectErrorStream(true);
+        Process mkdirProcess = mkdirProcessBuilder.start();
+        mkdirProcess.waitFor(); // Wait to complete the mkdir command.
 
-    unZipFiles(directoryPath + "\\"+zipFileName, MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
+        unZipFiles(directoryPath + "\\"+zipFileName, MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
 
-    Alert validationError = new Alert(Alert.AlertType.INFORMATION);
-    validationError.setTitle("The Extraction Message");
-    validationError.setHeaderText("The extraction of the zip file is successfully completed.");
-    validationError.showAndWait();
-}
-
+        Alert validationError = new Alert(Alert.AlertType.INFORMATION);
+        validationError.setTitle("The Extraction Message");
+        validationError.setHeaderText("The extraction of the zip file is successfully completed.");
+        validationError.showAndWait();
+    }
 
     public static void unZipFiles(String zipFilePath, String zipDestinationDirectory) {
         byte[] buffer = new byte[1024];
@@ -113,63 +113,93 @@ private static void extractCommand() throws IOException, InterruptedException {
             System.err.println("The creating file error: " + e.getMessage());
             e.printStackTrace();
         }
+
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(outputFile));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         try {
             extractCommand();
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         size = execSet.size();
-        try{
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        long timeout = 3000; // 3 saniye
+
+        try {
             if (!compSet.contains("NULL")) {
-                int i = 0;
-                int j = 0;
-                while (i < compSet.size() && j < execSet.size()) {
+                for (int i = 0, j = 0; i < compSet.size() && j < execSet.size(); i++, j++) {
                     String compCommand = compSet.get(i);
                     String execCommand = execSet.get(j);
-                        File file = new File(MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
-                        Process compileProcess = Runtime.getRuntime().exec(compCommand, null,file);
-                        compileProcess.waitFor();
-                        Process executeProcess = Runtime.getRuntime().exec(execCommand, null,file);
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(executeProcess.getInputStream()));
-                        String line;
-                        long startTime = System.currentTimeMillis();
-                        long timeout = 3000; // 3 saniye
-                        while ((line = reader.readLine()) != null) {
-                            writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
-                            writer.flush();
+                    File file = new File(MainController.getDirectoryPathWithoutZip() + "\\extractedFiles");
+
+                    if (!runProcessWithTimeout(compCommand, file, executor, timeout)) {
+                        writer.append(Compilation_Interpretation.zipFileExtraction().get(i) + ": NULL\n");
+                    } else {
+                        if (!runProcessWithTimeout(execCommand, file, executor, timeout)) {
+                            writer.append(Compilation_Interpretation.zipFileExtraction().get(i) + ": NULL\n");
+                        } else {
+                            writeProcessOutput(execCommand, file, writer, Compilation_Interpretation.zipFileExtraction().get(i));
                         }
-                        executeProcess.waitFor();
-                        i++;
-                        j++;
                     }
-                writer.close();
-            }
-            else{
-                for (int i=0; i<execSet.size();i++) {
+                    writer.flush();
+                }
+            } else {
+                for (int i = 0; i < execSet.size(); i++) {
                     String execCommand = execSet.get(i);
-                    File file = new File(MainController.getDirectoryPathWithoutZip()+"\\extractedFiles");
-                    Process executeProcess = Runtime.getRuntime().exec(execCommand, null,file);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(executeProcess.getInputStream()));
-                    String line;
-                    long startTime = System.currentTimeMillis();
-                    long timeout = 3000; // 3 saniye
-                    while ((line = reader.readLine()) != null) {
-                        writer.append(Compilation_Interpretation.zipFileExtraction().get(i)+ ": ").append(line).append("\n"); // Print to the file
-                        writer.flush();
+                    File file = new File(MainController.getDirectoryPathWithoutZip() + "\\extractedFiles");
+
+                    if (!runProcessWithTimeout(execCommand, file, executor, timeout)) {
+                        writer.append(Compilation_Interpretation.zipFileExtraction().get(i) + ": NULL\n");
+                    } else {
+                        writeProcessOutput(execCommand, file, writer, Compilation_Interpretation.zipFileExtraction().get(i));
                     }
-                    executeProcess.waitFor();
+                    writer.flush();
                 }
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            executor.shutdown();
+            try {
+                if (writer != null) {
+                    writer.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
         return outputFile;
+    }
+
+    private static boolean runProcessWithTimeout(String command, File directory, ExecutorService executor, long timeout) {
+        Callable<Boolean> task = () -> {
+            Process process = Runtime.getRuntime().exec(command, null, directory);
+            return process.waitFor(timeout, TimeUnit.MILLISECONDS);
+        };
+
+        Future<Boolean> future = executor.submit(task);
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private static void writeProcessOutput(String command, File directory, BufferedWriter writer, String prefix) throws IOException {
+        Process process = Runtime.getRuntime().exec(command, null, directory);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            writer.append(prefix + ": ").append(line).append("\n");
+        }
     }
 
     public static ArrayList<String> compilationFileReg(ArrayList<String> compileSet){
@@ -255,6 +285,4 @@ private static void extractCommand() throws IOException, InterruptedException {
         }
         return selectedExecParam;
     }
-
-
 }

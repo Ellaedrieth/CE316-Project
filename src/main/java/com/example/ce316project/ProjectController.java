@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 
@@ -25,7 +28,7 @@ public class ProjectController implements Initializable {
     public final String CONFIG_FILE_PATH = "src/main/resources/com/example/ce316project/";
     public final String Project_File_Path = "src/main/resources/com/example/ce316project/";
     @FXML
-    Button submissionZipBtn, outputBtn , projectGenBtn;
+    Button submissionZipBtn, outputBtn , projectGenBtn, importBtn;
     @FXML
     TextField submissionTextField,outputTextField,projectNameTextField;
     @FXML
@@ -49,6 +52,7 @@ public class ProjectController implements Initializable {
 
            }
         );
+        importBtn.setOnAction(event -> importAct());
     }
     public static String takeConfigName(String newConfigFileName){
         String languageValue = "";
@@ -219,6 +223,45 @@ public class ProjectController implements Initializable {
 
         } catch (Exception e) {
             System.out.println("Can't open new window.");
+        }
+    }
+    public void importAct(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Configuration File to import");
+
+        //only for the submission configuration files(for .dat extension)
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("DAT Files (*.dat)", "*.dat");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        //to open the computer files screen
+        Stage stage = (Stage) importBtn.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null ) {
+            Path resourcesDir = Path.of(CONFIG_FILE_PATH);
+            Path targetPath = resourcesDir.resolve(selectedFile.getName());
+            try {
+                if (Files.exists(targetPath)) {
+                    Alert duplicateError = new Alert(Alert.AlertType.WARNING);
+                    duplicateError.setTitle("Duplicate File Name");
+                    duplicateError.setHeaderText("There is a file that has the same name!");
+                    duplicateError.showAndWait();
+                    System.out.println("File already exists in the resources directory: " + targetPath.toString());
+                } else {
+                    String totalFileName = selectedFile.getName();
+                    int datIndex = totalFileName.indexOf(".");
+                    String justFileName = totalFileName.substring(0,datIndex);
+                    Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+                    projectConfigMenu.setValue(justFileName);
+                    System.out.println("File copied to: " + targetPath.toString());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Failed to copy file: " + e.getMessage());
+            }
+
+
+
         }
     }
 

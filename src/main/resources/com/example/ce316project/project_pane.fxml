@@ -16,7 +16,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button fx:id="createConfigOnProjectPane" layoutX="339.0" layoutY="181.0" mnemonicParsing="false" onAction="#newConfigurationButtonOnProjectPane" style="-fx-background-color: #1e90ff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="443.0" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="180.0" />
+        <Button fx:id="createConfigOnProjectPane" layoutX="262.0" layoutY="181.0" mnemonicParsing="false" onAction="#newConfigurationButtonOnProjectPane" style="-fx-background-color: #1e90ff;" text="Create New" textFill="WHITE" AnchorPane.bottomAnchor="442.0" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="181.0" />
         <Label layoutX="47.0" layoutY="239.0" prefHeight="20.0" prefWidth="182.0" style="-fx-text-fill: white;" text="Submission Zip File" textFill="WHITE" AnchorPane.bottomAnchor="395.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="235.0">
             <font>
                 <Font size="14.0" />
@@ -33,8 +33,9 @@
         <TextField fx:id="outputTextField" layoutX="44.0" layoutY="363.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" AnchorPane.bottomAnchor="260.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="128.0" AnchorPane.topAnchor="363.0" />
         <Button fx:id="outputBtn" layoutX="336.0" layoutY="364.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="Select" textFill="WHITE" AnchorPane.bottomAnchor="259.0" AnchorPane.leftAnchor="326.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="364.0" />
         <Button fx:id="projectGenBtn" layoutX="188.0" layoutY="501.0" mnemonicParsing="false" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="151.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="172.0" AnchorPane.topAnchor="451.0" />
-      <ChoiceBox fx:id="projectConfigMenu" layoutX="40.0" layoutY="181.0" prefHeight="26.0" prefWidth="267.0" style="-fx-background-color: #101010;" stylesheets="@design.css" />
-      <Text layoutX="40.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <ChoiceBox fx:id="projectConfigMenu" layoutX="40.0" layoutY="181.0" prefHeight="26.0" prefWidth="212.0" style="-fx-background-color: #101010;" stylesheets="@design.css" />
+        <Text layoutX="40.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <Button fx:id="importBtn" layoutX="358.0" layoutY="182.0" mnemonicParsing="false" onAction="#importAct" style="-fx-background-color: #1e90ff;" text="Import" textFill="WHITE" />
 
     </children>
 </AnchorPane>

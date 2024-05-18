@@ -51,6 +51,7 @@
                   <Font size="14.0" />
                </font></Label>
             <Button fx:id="deleteButton" layoutX="73.0" layoutY="72.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="exportButton" layoutX="404.0" layoutY="72.0" mnemonicParsing="false" text="Export" />
             </children>
         </AnchorPane>
 
