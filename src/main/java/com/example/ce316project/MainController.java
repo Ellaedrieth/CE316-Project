@@ -264,21 +264,6 @@ public class MainController implements Initializable {
     }
 
 
-    public void editProjectButton(ActionEvent event) {
-        System.out.println("You clicked Edit Project");
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("edit_project.fxml"));
-            Parent root1 = fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL); // Disables main window until this one is closed
-            stage.setTitle("Edit Project");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (Exception e) {
-            System.out.println("Can't open new window.");
-        }
-    }
-
     public void newConfigurationButton(ActionEvent event) {
         System.out.println("You clicked New Configuration");
         try {

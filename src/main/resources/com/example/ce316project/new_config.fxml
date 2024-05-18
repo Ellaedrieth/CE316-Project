@@ -22,7 +22,7 @@
                 <Button fx:id="generateConfigBtn" layoutX="172.0" layoutY="537.0" mnemonicParsing="false" onAction="#configGenAct" prefWidth="84.0" style="-fx-background-color: #1e90ff;" text="GENERATE" textFill="WHITE" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="537.0" />
                 <TextField fx:id="extensionInput" layoutX="41.0" layoutY="249.0" prefHeight="26.0" prefWidth="282.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
             <TextField fx:id="compilerParametersInput" layoutX="41.0" layoutY="412.0" prefHeight="27.0" prefWidth="329.0" style="-fx-background-color: black; -fx-border-color: grey;" stylesheets="@design.css" />
-            <Label layoutX="40.0" layoutY="379.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Compiler Parameters (e.g. javac fileName.java), if needed" textFill="WHITE">
+            <Label layoutX="40.0" layoutY="369.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="Compiler Parameters (e.g. javac fileName.java), if needed" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
@@ -45,6 +45,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
+            <Label layoutX="40.0" layoutY="389.0" prefHeight="20.0" prefWidth="355.0" style="-fx-text-fill: white;" text="otherwise, write NULL" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
 

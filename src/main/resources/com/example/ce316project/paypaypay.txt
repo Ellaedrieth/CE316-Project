@@ -1,4 +1,0 @@
-Project Name: paypaypay
-Configuration Name: pypy
-Zip File Path: C:\Users\ASUS\Desktop\hi2.zip
-Output File: C:\Users\ASUS\Desktop\exp_output.txt

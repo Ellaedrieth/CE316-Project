@@ -132,7 +132,7 @@ public class Compilation_Interpretation {
         long timeout = 3000; // 3 saniye
 
         try {
-            if (!compSet.contains("NULL")) {
+            if (!compSet.contains("NULL"))  {
                 for (int i = 0, j = 0; i < compSet.size() && j < execSet.size(); i++, j++) {
                     String compCommand = compSet.get(i);
                     String execCommand = execSet.get(j);

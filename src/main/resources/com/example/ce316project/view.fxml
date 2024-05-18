@@ -11,7 +11,7 @@
     <children>
         <AnchorPane prefHeight="650.0" prefWidth="450.0" style="-fx-background-color: #000000;">
             <children>
-                <Button fx:id="helpButton" layoutX="338.0" layoutY="14.0" minWidth="68.0" mnemonicParsing="false" onAction="#helpButtonClicked" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #0000;" textFill="WHITE">
+                <Button fx:id="helpButton" layoutX="338.0" layoutY="14.0" minWidth="68.0" mnemonicParsing="false" onAction="#helpButtonClicked" prefHeight="35.0" prefWidth="97.0" style="-fx-background-color: #0000;" text="Help       " textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
