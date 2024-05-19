@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.net.URL;
@@ -62,6 +63,8 @@ public class MainController implements Initializable {
         runBtn.setOnAction(event -> {
             takenValue = openProject.getValue();
             try {
+                File file = new File(MainController.getDirectoryPathWithoutZip() + "\\project_result_output.txt");
+                if(file.exists()){file.delete();}
                 Comparison.compareFileContents(Compilation_Interpretation.compile(Compilation_Interpretation.compilationFileReg(Compilation_Interpretation.zipFileExtraction()),
                         Compilation_Interpretation.executionFileReg(Compilation_Interpretation.zipFileExtraction())),getOutputFilePathItem(takenValue) );
             } catch (IOException e) {
@@ -76,8 +79,20 @@ public class MainController implements Initializable {
             resultCol.setCellValueFactory(new PropertyValueFactory<Student,String>("result"));
             resultTable.setItems(stu_list);
             resultTable.refresh();
+            try {
+                FileUtils.cleanDirectory(new File(MainController.getDirectoryPathWithoutZip() + "\\extractedFiles"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         });
-        zipBtn.setOnAction(event -> convertToZip());
+        zipBtn.setOnAction(actionEvent -> {
+            try {
+                FileUtils.cleanDirectory(new File(MainController.getDirectoryPathWithoutZip() + "\\students_zip"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            convertToZip();
+        });
     }
     public void openConfigurationButton(ActionEvent event) {
         System.out.println("You clicked New Configuration");

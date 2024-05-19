@@ -8,6 +8,7 @@ module com.example.ce316project {
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
     requires zip4j;
+    requires org.apache.commons.io;
 
     opens com.example.ce316project to javafx.fxml;
     exports com.example.ce316project;

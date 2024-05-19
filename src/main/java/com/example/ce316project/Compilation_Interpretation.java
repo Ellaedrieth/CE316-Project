@@ -140,6 +140,7 @@ public class Compilation_Interpretation {
 
                     if (!runProcessWithTimeout(compCommand, file, executor, timeout)) {
                         writer.append(Compilation_Interpretation.zipFileExtraction().get(i) + ": NULL\n");
+
                     } else {
                         if (!runProcessWithTimeout(execCommand, file, executor, timeout)) {
                             writer.append(Compilation_Interpretation.zipFileExtraction().get(i) + ": NULL\n");
@@ -148,6 +149,7 @@ public class Compilation_Interpretation {
                         }
                     }
                     writer.flush();
+
                 }
             } else {
                 for (int i = 0; i < execSet.size(); i++) {
