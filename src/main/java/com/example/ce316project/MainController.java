@@ -75,6 +75,10 @@ public class MainController implements Initializable {
         resultBtn.setOnAction(actionEvent -> {
             resultTable.getItems().clear();
             set_list();
+            Alert addedSuccess = new Alert(Alert.AlertType.INFORMATION);
+            addedSuccess.setTitle("Results Information");
+            addedSuccess.setHeaderText("Results are being displayed!");
+            addedSuccess.showAndWait();
             studentCol.setCellValueFactory(new PropertyValueFactory<Student,Long>("student_id"));
             resultCol.setCellValueFactory(new PropertyValueFactory<Student,String>("result"));
             resultTable.setItems(stu_list);
@@ -86,6 +90,11 @@ public class MainController implements Initializable {
             }
         });
         zipBtn.setOnAction(actionEvent -> {
+            String zipFilePath = getDirectoryPathWithoutZip()+"\\students_zip";
+            File zipDirectory = new File(zipFilePath);
+            if(!zipDirectory.exists()){
+                zipDirectory.mkdir();
+            }
             try {
                 FileUtils.cleanDirectory(new File(MainController.getDirectoryPathWithoutZip() + "\\students_zip"));
             } catch (IOException e) {
@@ -322,13 +331,8 @@ public class MainController implements Initializable {
             emptyWarning.showAndWait();
         }
         else{
-            String zipFilePath = getDirectoryPathWithoutZip()+"\\students_zip";
-            File zipDirectory = new File(zipFilePath);
-            if(!zipDirectory.exists()){
-                zipDirectory.mkdir();
-            }
             for(Student students : stu_list){
-                String zipFileName = zipFilePath + "\\" + students.getStudent_id() + ".zip";
+                String zipFileName = MainController.getDirectoryPathWithoutZip()+"\\students_zip" + "\\" + students.getStudent_id() + ".zip";
                 try(ZipOutputStream zipOutputStream = new ZipOutputStream(new FileOutputStream(zipFileName))) {
                     ZipEntry zipEntry = new ZipEntry(students.getStudent_id()+".txt");
                     zipOutputStream.putNextEntry(zipEntry);
