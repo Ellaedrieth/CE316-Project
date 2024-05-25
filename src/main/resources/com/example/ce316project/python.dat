@@ -1,5 +1,5 @@
 Configuration Name: python
 Executable File Extension: py
-Programming Language: Python
+Programming Language: python
 Compiler Parameters: NULL
 Execution Parameter: py fileName.py

@@ -78,7 +78,7 @@ public class OpenConfigController implements Initializable {
                     }
                 }
                 inputBar.setText(null);
-
+                reader.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -138,20 +138,23 @@ public class OpenConfigController implements Initializable {
         configName = inputBar.getText() + ".dat";
         String path = "src/main/resources/com/example/ce316project/" + configName;
         File file = new File(path);
+        String name;
         if (file.exists()) {
+            int dotIndex = file.getName().indexOf(".");
+            name = file.getName().substring(0, dotIndex);
             if (file.delete()) {
                 System.out.println("File deleted.");
                 inputBar.setText("CONFIGURATION IS DELETED!");
+                ProjectController.newLangItems.remove(name);
+            } else {
+                Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                errorAlert.setTitle("Error");
+                errorAlert.setHeaderText("An error occurred while saving the configuration.");
+                errorAlert.setContentText("Hey!");
+                errorAlert.showAndWait();
             }
-        } else {
-            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
-            errorAlert.setTitle("Error");
-            errorAlert.setHeaderText("An error occurred while saving the configuration.");
-            errorAlert.setContentText("Hey!");
-            errorAlert.showAndWait();
         }
     }
-
 
     public void export() {
         configName = inputBar.getText() + ".dat";

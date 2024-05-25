@@ -1,6 +1,4 @@
 package com.example.ce316project;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,11 +82,6 @@ public class ProjectController implements Initializable {
         return newLangItems;
     }
 
-//    public ObservableList<String>  defaultLang(){
-//        progLanItems.add("java");
-//        progLanItems.add("python");
-//        return FXCollections.observableArrayList(progLanItems);
-//    }
 
     public void chooseSubmissionPath() {
         FileChooser fileChooser = new FileChooser();
@@ -252,8 +245,13 @@ public class ProjectController implements Initializable {
                     int datIndex = totalFileName.indexOf(".");
                     String justFileName = totalFileName.substring(0,datIndex);
                     Files.copy(selectedFile.toPath(), targetPath, StandardCopyOption.REPLACE_EXISTING);
-                    projectConfigMenu.setValue(justFileName);
+                    ProjectController.newLangItems.add(justFileName);
+                    projectConfigMenu.getItems().add(justFileName);
                     System.out.println("File copied to: " + targetPath.toString());
+                    Alert importMessage = new Alert(Alert.AlertType.INFORMATION);
+                    importMessage.setTitle("Imported");
+                    importMessage.setHeaderText("Importing is successfully completed!");
+                    importMessage.showAndWait();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
