@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
-<?import org.kordamp.ikonli.javafx.*?>
 
 <StackPane prefHeight="650" prefWidth="450" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ce316project.MainController">
     <children>
@@ -16,30 +15,23 @@
                         <Font size="14.0" />
                     </font>
                 </Button>
-                <MenuButton fx:id="projectMenuBtn" layoutX="34.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
+                <MenuButton fx:id="projectMenuBtn" layoutX="54.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Project" textFill="WHITE">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#newProjectButton" text="New Project" />
                     </items>
-                    <graphic>
-                        <FontIcon fx:id="project" iconColor="#a8ffe0" iconSize="15" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-project-diagram;" />
-                    </graphic>
                     <font>
                         <Font size="14.0" />
                     </font>
                 </MenuButton>
-                <MenuButton fx:id="configMenuBtn" layoutX="144.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Configuration" textFill="WHITE">
+                <MenuButton fx:id="configMenuBtn" layoutX="164.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #000000;" stylesheets="@design.css" text="Configuration" textFill="WHITE">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#newConfigurationButton" text="New Configuration" />
                         <MenuItem mnemonicParsing="false" onAction="#openConfigurationButton" text="Open Configuration" />
                     </items>
-                    <graphic>
-                        <FontIcon fx:id="config" iconColor="#8aff84" iconSize="20" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-sun;" />
-                    </graphic>
                     <font>
                         <Font size="14.0" />
                     </font>
                 </MenuButton>
-                <FontIcon fx:id="helpBtn" accessibleRole="BUTTON" iconColor="#c8ff00" iconSize="25" layoutX="394.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-question-circle;" text="" wrappingWidth="23.0" />
                 <Line endX="349.3999938964844" endY="3.814697265625E-6" layoutX="101.0" layoutY="58.0" startX="-100.0" stroke="WHITE" />
                 <TableView fx:id="resultTable" layoutX="59.0" layoutY="159.0" prefHeight="319.0" prefWidth="244.0" style="-fx-background-color: #080808; -fx-text-box-border: #B22222; -fx-focus-color: #B22222; -fx-text-fill: white;" stylesheets="@design.css">
                     <columns>
@@ -47,10 +39,7 @@
                         <TableColumn fx:id="resultCol" prefWidth="115.99993896484375" style="-fx-background-color: #080808;" text="Result" />
                     </columns>
                 </TableView>
-                <Button fx:id="runBtn" layoutX="333.0" layoutY="314.0" mnemonicParsing="false" style="-fx-background-color: #000000;" text="RUN" textFill="WHITE">
-                    <graphic>
-                        <FontIcon strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fab-google-play; -fx-icon-color: #1e90ff;" text="Text" />
-                    </graphic>
+                <Button fx:id="runBtn" layoutX="333.0" layoutY="314.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="67.0" style="-fx-background-color: #000000;" text="RUN" textFill="WHITE">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -70,13 +59,10 @@
                         <Image url="@img_ieu.png" />
                     </image>
                 </ImageView>
-                <Button fx:id="zipBtn" layoutX="144.0" layoutY="535.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="163.0" style="-fx-background-color: #101010;" text="Convert to ZIP file" textFill="WHITE">
+                <Button fx:id="zipBtn" layoutX="139.0" layoutY="537.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="170.0" style="-fx-background-color: #101010;" text="Convert to ZIP file             " textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font size="14.0" />
                     </font>
-                    <graphic>
-                        <FontIcon iconColor="#cceca6" iconSize="25" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: far-save;" text="Text" />
-                    </graphic>
                 </Button>
                 <Text fill="#bfb7b7" layoutX="146.0" layoutY="625.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-style: italic;" text="Department of Computer Engineering">
                     <font>
@@ -84,19 +70,50 @@
                     </font>
                 </Text>
             <ChoiceBox fx:id="openProject" layoutX="60.0" layoutY="124.0" prefHeight="26.0" prefWidth="163.0" style="-fx-background-color: #101010;" stylesheets="@design.css" />
-            <Button fx:id="refreshBtn" layoutX="223.0" layoutY="120.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="98.0" style="-fx-background-color: #000000;" text="Refresh" textFill="WHITE">
-               <graphic>
-                  <FontIcon fill="#eaff70" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-icon-code: fas-file-download;">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </FontIcon>
-               </graphic></Button>
-            <Button fx:id="resultBtn" layoutX="114.0" layoutY="487.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" style="-fx-background-color: #101010;" text="Show Results" textFill="WHITE">
+            <Button fx:id="refreshBtn" layoutX="234.0" layoutY="120.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" style="-fx-background-color: #000000;" text="Refresh" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="resultBtn" layoutX="142.0" layoutY="487.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #101010;" text="Show Results" textFill="WHITE">
                <font>
                   <Font size="13.0" />
                </font>
             </Button>
+            <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="391.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@questionmark1.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="26.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@project.png" />
+                </image>
+            </ImageView>
+            <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="134.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@config.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="222.0" layoutY="122.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="318.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@run.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="127.0" layoutY="486.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@result.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="44.0" layoutX="266.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@zip.png" />
+               </image>
+            </ImageView>
             </children></AnchorPane>
     </children>
 </StackPane>
