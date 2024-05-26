@@ -52,3 +52,9 @@ for the configuration name can be updated.
 
 The lecturer can access all the details about the program through this screen.
 
+
+
+
+
+For our program's showcase, you can click on this link and watch our video: https://youtu.be/4Por_DNbn2c
+
