@@ -1,3 +1,10 @@
+
+
+
+https://github.com/Ellaedrieth/CE316-Project/assets/93867521/ecf7f07a-793e-4a08-8be9-f5cb9f7a8b16
+
+
+
 Hello everyone,
 
 This project has been created by İzmir University of Economics students **Büşra Yılmaz**, **Sedat Nail Ersoy**, and **Ayça Dernek** for the course **CE 316**, Programming Paradigms. 
@@ -51,10 +58,6 @@ for the configuration name can be updated.
 ![image](https://github.com/Ellaedrieth/CE316-Project/assets/99333733/731aca34-e87d-4bd1-afc8-fb0afbb0e4e1)
 
 The lecturer can access all the details about the program through this screen.
-
-
-
-
 
 For our program's showcase, you can click on this link and watch our video: https://youtu.be/4Por_DNbn2c
 
