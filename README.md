@@ -3,7 +3,7 @@
 
 https://github.com/Ellaedrieth/CE316-Project/assets/93867521/ecf7f07a-793e-4a08-8be9-f5cb9f7a8b16
 
-
+For our program's showcase, you can click on this link and watch our video: https://youtu.be/4Por_DNbn2c
 
 Hello everyone,
 
@@ -59,5 +59,4 @@ for the configuration name can be updated.
 
 The lecturer can access all the details about the program through this screen.
 
-For our program's showcase, you can click on this link and watch our video: https://youtu.be/4Por_DNbn2c
 
